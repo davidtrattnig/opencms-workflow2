@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+	Bean Mapping for the Workflow-CMS Resource Relation Implementation
+-->
+
+<beans>	
+	<bean id="workflow.relationManager"
+		class="com.bearingpoint.opencms.workflow2.relation.RelationManager">
+		<property name="workflowRelationDAO">
+			<ref bean="workflow.workflowRelationDAO" />
+		</property>
+	</bean>
+	
+	<bean name="workflow.workflowRelationDAO"
+		class="com.bearingpoint.opencms.workflow2.relation.dao.WorkflowRelationHibernateDAO">		
+        <property name="sessionFactory">
+        	<ref bean="workflow.sessionFactory"/>
+        </property>
+	</bean>
+</beans>

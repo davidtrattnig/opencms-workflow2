@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+	Bean Mapping Workflow-CMS Database
+-->
+<!-- org.gjt.mm.mysql.Driver -->
+
+<beans>
+    <!-- MySQL -->
+    <bean id="workflow.dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+        <property name="driverClassName"><value>com.mysql.jdbc.Driver</value></property>
+        <property name="url"><value>jdbc:mysql://localhost:3306/workflow2?useServerPrepStmts=false&amp;jdbcCompliantTruncation=false</value></property>
+        <property name="username"><value>root</value></property>
+        <property name="password"><value>rootx</value></property>
+
+    </bean>
+    
+	<!-- Hibernate Setup MySQL -->
+	<bean id="workflow.sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="workflow.dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<!-- <prop key="hibernate.dialect">org.hibernate.dialect.MySQLMyISAMDialect</prop> -->
+				<!-- <prop key="hibernate.query.substitutions">true 1, false 0</prop> -->
+			</props>
+		</property>
+		<property name="configLocation">
+			<value>
+				classpath:com/bearingpoint/opencms/workflow2/hibernate.cfg.xml
+			</value>
+		</property>
+	</bean>
+
+	<bean id="workflow.transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="dataSource">
+			<ref bean="workflow.dataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="workflow.sessionFactory" />
+		</property>
+	</bean>
+</beans>

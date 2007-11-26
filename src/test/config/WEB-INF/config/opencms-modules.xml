@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE opencms SYSTEM "http://www.opencms.org/dtd/6.0/opencms-modules.dtd">
+
+<opencms>
+    <modules>
+		<module>
+			<name>com.bearingpoint.opencms.commons</name>
+			<nicename><![CDATA[BearingPoint Form-Module]]></nicename>
+			<group>BearingPoint Module</group>
+			<class></class>
+			<description><![CDATA[]]></description>
+			<version>0.0.1</version>
+			<authorname><![CDATA[Brabenetz Harald]]></authorname>
+			<authoremail><![CDATA[harald.brabenetz@bearingpoint.com]]></authoremail>
+			<datecreated/>
+			<userinstalled/>
+			<dateinstalled/>
+			<dependencies/>
+			<exportpoints>
+				<exportpoint uri="/system/modules/com.bearingpoint.opencms.commons/lib/" destination="WEB-INF/lib/"/>
+				<exportpoint uri="/system/modules/com.bearingpoint.opencms.commons/classes/" destination="WEB-INF/classes/"/>
+				<exportpoint uri="/system/modules/com.bearingpoint.opencms.commons/config/" destination="WEB-INF/config/"/>
+			</exportpoints>
+			<resources>
+				<resource uri="/system/modules/com.bearingpoint.opencms.commons/"/>
+			</resources>
+			<parameters/>
+			<resourcetypes>
+				<type class="org.opencms.file.types.CmsResourceTypeXmlContent" name="onlineForm" id="333">
+					<properties>
+						<property>
+							<name>template-elements</name>
+							<value type="shared"><![CDATA[/system/modules/com.bearingpoint.opencms.commons/page/onlineForm.jsp]]></value>
+						</property>
+						<property>
+							<name>content-conversion</name>
+							<value type="shared"><![CDATA[cleanup;xhtml]]></value>
+						</property>
+					</properties>
+					<param name="schema">/system/modules/com.bearingpoint.opencms.commons/schemas/onlineForm.xsd</param>
+				</type>
+			</resourcetypes>
+			<explorertypes>
+				<explorertype name="onlineForm" key="fileicon.onlineForm" icon="page.gif" reference="xmlcontent">
+					<newresource page="structurecontent" uri="newresource_xmlcontent.jsp?newresourcetype=onlineForm" order="1" autosetnavigation="false" autosettitle="false"/>
+					<accesscontrol>
+						<accessentry principal="GROUP.Administrators" permissions="+r+v+w+c"/>
+						<accessentry principal="GROUP.Projectmanagers" permissions="+r+v+w+c"/>
+						<accessentry principal="GROUP.Users" permissions="+r+v+w+c"/>
+					</accesscontrol>
+				</explorertype>
+			</explorertypes>
+		</module>
+		<module>
+			<name>com.bearingpoint.opencms.commons.springmanager</name>
+			<nicename><![CDATA[BearingPoint Commons-SpringManager-Module]]></nicename>
+			<group>BearingPoint Module</group>
+			<class>com.bearingpoint.opencms.commons.springmanager.SpringManagerModuleAction</class>
+			<description><![CDATA[
+	<p>The Springmanager loads Spring-Configuration-Files from the OpeCms-VFS at startup.</p>
+	<p>By Default the SpringManager iterates all OpenCms-Modules and looks if</p>
+	<p>"/system/modules/%PACKAGE%/config/spring/spring-config.xml" exists.</p>
+	<p>if it exists it loads all defined Spring-Configs in "spring-config.xml" into a List</p>
+	<p>After iteration of all Modules it will Load a SpringFactory with the resulted List.</p>
+	<p></p>
+	<p>It also contains an Administration-View for OpenCms to reload the BeanFactory</p>
+	<p>So you can reload (after update &amp; publish of a Springconfiguration-file) the</p>
+	<p>Spring-Configuration on the fly without restart the OpenCms-webapps or Server.</p>
+	<p>(This is very useful during Development)</p>
+	]]></description>
+			<version>0.9.5</version>
+			<authorname><![CDATA[Brabenetz Harald]]></authorname>
+			<authoremail><![CDATA[harald.brabenetz@bearingpoint.com]]></authoremail>
+			<datecreated/>
+			<userinstalled/>
+			<dateinstalled/>
+			<dependencies>
+				<dependency name="com.bearingpoint.opencms.commons" version="0.9.5"/>
+			</dependencies>
+			<exportpoints>
+				<exportpoint uri="/system/modules/com.bearingpoint.opencms.commons.springmanager/lib/" destination="WEB-INF/lib/"/>
+				<exportpoint uri="/system/modules/com.bearingpoint.opencms.commons.springmanager/classes/" destination="WEB-INF/classes/"/>
+				<exportpoint uri="/system/modules/com.bearingpoint.opencms.commons.springmanager/config/" destination="WEB-INF/config/"/>
+			</exportpoints>
+			<resources>
+				<resource uri="/system/modules/com.bearingpoint.opencms.commons.springmanager/"/>
+			</resources>
+			<parameters/>
+		</module>
+		<module>
+			<name>com.bearingpoint.opencms.workflow2</name>
+			<nicename><![CDATA[BearingPoint Workflow2 Core Module]]></nicename>
+			<group>BearingPoint Module</group>
+			<class></class>
+			<description><![CDATA[BearingPoint Workflow2 Core Module]]></description>
+			<version>0.0.13</version>
+			<authorname><![CDATA[David Trattnig]]></authorname>
+			<authoremail><![CDATA[david.trattnig@bearingpoint.com]]></authoremail>
+			<datecreated/>
+			<userinstalled/>
+			<dateinstalled/>
+			<dependencies>
+				<dependency name="com.bearingpoint.opencms.commons.springmanager" version="0.9.0"/>
+			</dependencies>
+			<exportpoints>
+				<exportpoint uri="/system/modules/com.bearingpoint.opencms.workflow2/lib/" destination="WEB-INF/lib/"/>
+				<exportpoint uri="/system/modules/com.bearingpoint.opencms.workflow2/classes/" destination="WEB-INF/classes/"/>
+				<exportpoint uri="/system/modules/com.bearingpoint.opencms.workflow2/config/" destination="WEB-INF/classes/com/bearingpoint/opencms/workflow2/config/" />
+			</exportpoints>
+			<resources>
+				<resource uri="/system/modules/com.bearingpoint.opencms.workflow2/resources"/>
+			</resources>
+			<parameters/>
+		</module>
+    </modules>    
+</opencms>    

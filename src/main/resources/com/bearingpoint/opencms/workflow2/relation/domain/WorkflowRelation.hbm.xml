@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.bearingpoint.opencms.workflow2.relation.domain">
+
+    <class name="WorkflowRelation" table="wf_workflowrelation">
+        <id name="id" column="ID" unsaved-value="null">
+            <generator class="native" />
+        </id>
+
+        <property name="workflowId" column="WORKFLOW_ID" />
+        <property name="resource" column="RESOURCE_PATH" />
+        <property name="uuid" column="RESOURCE_UUID" />
+    </class>
+
+</hibernate-mapping>

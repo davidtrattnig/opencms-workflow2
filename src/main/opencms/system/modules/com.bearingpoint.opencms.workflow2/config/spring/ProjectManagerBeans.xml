@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+	Bean Mapping for the Workflow-Project Mgmnt Implementation
+-->
+
+<beans>	
+	<bean id="workflow.projectManager"
+		class="com.bearingpoint.opencms.workflow2.stage.ProjectManager">
+		<property name="workflowProjectDAO">
+			<ref bean="workflow.workflowProjectDAO" />
+		</property>
+	</bean>
+	
+	<bean name="workflow.workflowProjectDAO"
+		class="com.bearingpoint.opencms.workflow2.stage.dao.WorkflowProjectListHibernateDAO">		
+        <property name="sessionFactory">
+        	<ref bean="workflow.sessionFactory"/>
+        </property>
+	</bean>
+</beans>

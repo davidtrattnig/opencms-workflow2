@@ -1,0 +1,17 @@
+History of changes for the OpenCms Workflow2 Module.
+
+Changes are chronologically ordered from top (most recent) to bottom (least recent).
+For more information about the OpenCms Workflow2 project visit us at Sourceforge:
+https://sourceforge.net/projects/bp-cms-commons/
+
+Legend:
+! New Feature
+* Bug fixed
+- General comment
+
+
+Workflow2 0.3.7 ALPHA1 - November 7, 2007
+- Basic workflow functionality
+- Workflow engine interface definitions
+- Event Listener interface for workflow state changes
+ 

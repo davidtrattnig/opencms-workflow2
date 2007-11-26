@@ -1,0 +1,245 @@
+### Eclipse Workspace Patch 1.0
+#P opencms-core
+Index: webapp/WEB-INF/config/opencms-workplace.xml
+===================================================================
+RCS file: /usr/local/cvs/opencms/webapp/WEB-INF/config/opencms-workplace.xml,v
+retrieving revision 1.64
+diff -u -r1.64 opencms-workplace.xml
+--- webapp/WEB-INF/config/opencms-workplace.xml	12 Sep 2007 07:34:10 -0000	1.64
++++ webapp/WEB-INF/config/opencms-workplace.xml	26 Nov 2007 11:56:14 -0000
+@@ -17,7 +17,7 @@
+       //-->
+       <dialoghandler class="org.opencms.workplace.commons.CmsDelete"/>
+       <dialoghandler class="org.opencms.workplace.commons.CmsLock"/>
+-      <dialoghandler class="org.opencms.workplace.commons.CmsPropertyAdvanced"/>
++      <dialoghandler class="org.opencms.frontend.templateone.CmsPropertyTemplateOne"/>
+     </dialoghandlers>
+     <editorhandler class="org.opencms.workplace.editors.CmsEditorHandler"/>
+     <editoraction class="org.opencms.workplace.editors.CmsEditorActionDefault"/>
+@@ -50,7 +50,7 @@
+             <defaultproperty name="Title"/>
+           </defaultproperties>
+           <contextmenu>
+-			<entry key="GUI_EXPLORER_CONTEXT_LOCK_0" uri="commons/lock.jsp" rule="lock"/>
++   	    <entry key="GUI_EXPLORER_CONTEXT_LOCK_0" uri="commons/lock.jsp" rule="lock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_OVERRIDELOCK_0" uri="commons/lockchange.jsp" rule="changelock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_UNLOCK_0" uri="commons/unlock.jsp" rule="unlock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_LOCKS_0" uri="commons/locks.jsp" rule="showlocks"/>
+@@ -104,6 +104,8 @@
+             <defaultproperty name="Description"/>
+           </defaultproperties>
+           <contextmenu>
++            <!-- WORKFLOW2 ITEM -->
++            <entry key="GUI_EXPLORER_CONTEXT_MOVETOPROJECT_0" uri="commons/movetoproject.jsp" rule="movetoproject"/>
+             <entry key="GUI_EXPLORER_CONTEXT_LOCK_0" uri="commons/lock.jsp" rule="lock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_OVERRIDELOCK_0" uri="commons/lockchange.jsp" rule="changelock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_UNLOCK_0" uri="commons/unlock.jsp" rule="unlock"/>
+@@ -156,6 +158,8 @@
+             <defaultproperty name="export"/>
+           </defaultproperties>
+           <contextmenu>
++            <!-- WORKFLOW2 ITEM -->
++            <entry key="GUI_EXPLORER_CONTEXT_MOVETOPROJECT_0" uri="commons/movetoproject.jsp" rule="movetoproject"/>
+             <entry key="GUI_EXPLORER_CONTEXT_LOCK_0" uri="commons/lock.jsp" rule="lock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_OVERRIDELOCK_0" uri="commons/lockchange.jsp" rule="changelock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_UNLOCK_0" uri="commons/unlock.jsp" rule="unlock"/>
+@@ -204,6 +208,8 @@
+             <defaultproperty name="Description"/>
+           </defaultproperties>
+           <contextmenu>
++            <!-- WORKFLOW2 ITEM -->
++            <entry key="GUI_EXPLORER_CONTEXT_MOVETOPROJECT_0" uri="commons/movetoproject.jsp" rule="movetoproject"/>
+             <entry key="GUI_EXPLORER_CONTEXT_LOCK_0" uri="commons/lock.jsp" rule="lock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_OVERRIDELOCK_0" uri="commons/lockchange.jsp" rule="changelock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_UNLOCK_0" uri="commons/unlock.jsp" rule="unlock"/>
+@@ -258,6 +264,8 @@
+             <defaultproperty name="export"/>
+           </defaultproperties>
+           <contextmenu>
++            <!-- WORKFLOW2 ITEM -->
++            <entry key="GUI_EXPLORER_CONTEXT_MOVETOPROJECT_0" uri="commons/movetoproject.jsp" rule="movetoproject"/>
+             <entry key="GUI_EXPLORER_CONTEXT_LOCK_0" uri="commons/lock.jsp" rule="lock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_OVERRIDELOCK_0" uri="commons/lockchange.jsp" rule="changelock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_UNLOCK_0" uri="commons/unlock.jsp" rule="unlock"/>
+@@ -305,6 +313,8 @@
+             <defaultproperty name="Title"/>
+           </defaultproperties>
+           <contextmenu>
++            <!-- WORKFLOW2 ITEM -->
++            <entry key="GUI_EXPLORER_CONTEXT_MOVETOPROJECT_0" uri="commons/movetoproject.jsp" rule="movetoproject"/>
+             <entry key="GUI_EXPLORER_CONTEXT_LOCK_0" uri="commons/lock.jsp" rule="lock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_OVERRIDELOCK_0" uri="commons/lockchange.jsp" rule="changelock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_UNLOCK_0" uri="commons/unlock.jsp" rule="unlock"/>
+@@ -351,6 +361,8 @@
+             <defaultproperty name="Title"/>
+           </defaultproperties>
+           <contextmenu>
++            <!-- WORKFLOW2 ITEM -->
++            <entry key="GUI_EXPLORER_CONTEXT_MOVETOPROJECT_0" uri="commons/movetoproject.jsp" rule="movetoproject"/>
+             <entry key="GUI_EXPLORER_CONTEXT_LOCK_0" uri="commons/lock.jsp" rule="lock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_OVERRIDELOCK_0" uri="commons/lockchange.jsp" rule="changelock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_UNLOCK_0" uri="commons/unlock.jsp" rule="unlock"/>
+@@ -401,6 +413,8 @@
+             <defaultproperty name="Title"/>
+           </defaultproperties>
+           <contextmenu>
++            <!-- WORKFLOW2 ITEM -->
++            <entry key="GUI_EXPLORER_CONTEXT_MOVETOPROJECT_0" uri="commons/movetoproject.jsp" rule="movetoproject"/>
+             <entry key="GUI_EXPLORER_CONTEXT_LOCK_0" uri="commons/lock.jsp" rule="lock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_OVERRIDELOCK_0" uri="commons/lockchange.jsp" rule="changelock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_UNLOCK_0" uri="commons/unlock.jsp" rule="unlock"/>
+@@ -450,6 +464,8 @@
+             <defaultproperty name="Title"/>
+           </defaultproperties>
+           <contextmenu>
++            <!-- WORKFLOW2 ITEM -->
++            <entry key="GUI_EXPLORER_CONTEXT_MOVETOPROJECT_0" uri="commons/movetoproject.jsp" rule="movetoproject"/>
+             <entry key="GUI_EXPLORER_CONTEXT_LOCK_0" uri="commons/lock.jsp" rule="lock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_OVERRIDELOCK_0" uri="commons/lockchange.jsp" rule="changelock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_UNLOCK_0" uri="commons/unlock.jsp" rule="unlock"/>
+@@ -508,6 +524,8 @@
+             <defaultproperty name="Description"/>
+           </defaultproperties>
+           <contextmenu>
++            <!-- WORKFLOW2 ITEM -->
++            <entry key="GUI_EXPLORER_CONTEXT_MOVETOPROJECT_0" uri="commons/movetoproject.jsp" rule="movetoproject"/>
+             <entry key="GUI_EXPLORER_CONTEXT_LOCK_0" uri="commons/lock.jsp" rule="lock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_OVERRIDELOCK_0" uri="commons/lockchange.jsp" rule="changelock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_UNLOCK_0" uri="commons/unlock.jsp" rule="unlock"/>
+@@ -560,7 +578,9 @@
+         <editoptions>
+           <defaultproperties enabled="false" shownavigation="false" />
+           <contextmenu>
+-			<entry key="GUI_EXPLORER_CONTEXT_LOCK_0" uri="commons/lock.jsp" rule="lock"/>
++            <!-- WORKFLOW2 ITEM -->
++            <entry key="GUI_EXPLORER_CONTEXT_MOVETOPROJECT_0" uri="commons/movetoproject.jsp" rule="movetoproject"/>
++   	    <entry key="GUI_EXPLORER_CONTEXT_LOCK_0" uri="commons/lock.jsp" rule="lock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_OVERRIDELOCK_0" uri="commons/lockchange.jsp" rule="changelock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_UNLOCK_0" uri="commons/unlock.jsp" rule="unlock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_LOCKS_0" uri="commons/locks.jsp" rule="showlocks"/>
+@@ -600,6 +620,8 @@
+ 		<editoptions>
+           <defaultproperties enabled="false" shownavigation="false" />
+           <contextmenu>
++            <!-- WORKFLOW2 ITEM -->
++            <entry key="GUI_EXPLORER_CONTEXT_MOVETOPROJECT_0" uri="commons/movetoproject.jsp" rule="movetoproject"/>
+             <entry key="GUI_EXPLORER_CONTEXT_LOCK_0" uri="commons/lock.jsp" rule="lock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_OVERRIDELOCK_0" uri="commons/lockchange.jsp" rule="changelock"/>
+             <entry key="GUI_EXPLORER_CONTEXT_UNLOCK_0" uri="commons/unlock.jsp" rule="unlock"/>
+@@ -652,7 +674,15 @@
+         <entry key="GUI_EXPLORER_CONTEXT_UNDELETE_0" uri="commons/undelete.jsp" rule="multistandard"/>
+       </multicontextmenu>
+ 	  <menurules>
++    	<menurule name="movetoproject">
++      	    <menuitemrule class="com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible" />
++    		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOnlineInvisible" />
++    		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrSameUnlockedInactiveNoAl" />
++    		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrSameLockedActiveNotDeletedAlPermW" />
++    		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrSameOtherlockInvisible" />
++    	</menurule>
+     	<menurule name="standard">
++      	    <menuitemrule class="com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOnlineInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrSameUnlockedInactiveNoAl" />
+@@ -660,6 +690,7 @@
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrSameOtherlockInvisible" />
+     	</menurule>
+     	<menurule name="copy">
++    	    <menuitemrule class="com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOnlineInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrSameUnlockedActiveNotDeletedNoAl" />
+@@ -667,11 +698,13 @@
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrSameOtherlockInvisible" />
+     	</menurule>
+     	<menurule name="copytoproject">
++    	    <menuitemrule class="com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOnlineInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOtherActive" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirAlwaysInvisible" />
+     	</menurule>
+     	<menurule name="undelete">
++    	    <menuitemrule class="com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOnlineInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrSameUnlockedActiveDeletedNoAl" />
+@@ -679,6 +712,7 @@
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrSameOtherlockInvisible" />
+     	</menurule>
+     	<menurule name="undochanges">
++    	    <menuitemrule class="com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOnlineInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrSameUnlockedInactiveNotDeletedNoAl" />
+@@ -686,6 +720,7 @@
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrSameOtherlockInvisible" />
+     	</menurule>
+     	<menurule name="permissions">
++    	    <menuitemrule class="com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOnlineActive" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOtherActive" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrSameUnlockedInactiveNoAl" />
+@@ -693,17 +728,20 @@
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrSameOtherlockInvisible" />
+     	</menurule>
+     	<menurule name="directpublish">
++    	    <menuitemrule class="com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOnlineInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirDirectPublish" />
+     	</menurule>
+     	<menurule name="lock">
++    	    <menuitemrule class="com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOnlineInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrSameUnlockedActive" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirAlwaysInvisible" />
+     	</menurule>
+     	<menurule name="unlock">
++    	    <menuitemrule class="com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOnlineInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrSameUnlockedInvisible" />
+@@ -711,6 +749,7 @@
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirAlwaysInvisible" />
+     	</menurule>
+     	<menurule name="changelock">
++    	    <menuitemrule class="com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOnlineInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrSameUnlockedInvisible" />
+@@ -718,26 +757,33 @@
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrSameOtherlockActiveNoPublish" />
+     	</menurule>
+     	<menurule name="showlocks">
++    	    <menuitemrule class="com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOnlineInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirPrOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirAlwaysActive" />
+     	</menurule>
+     	<menurule name="editcontrolcode">
++    	    <menuitemrule class="com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirEditControlcode" />
+     	</menurule>
+     	<menurule name="showsiblings">
++    	    <menuitemrule class="com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirShowSiblings" />
+     	</menurule>
+     	<menurule name="nondeleted">
++    	    <menuitemrule class="com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirActiveNonDeleted" />
+     	</menurule>
+     	<menurule name="multistandard">
++    	    <menuitemrule class="com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirMultiStandard" />
+     	</menurule>
+     	<menurule name="multipubstandard">
++    	    <menuitemrule class="com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirMultiDirPublishStandard" />
+     	</menurule>
+     	<menurule name="substandard">
++    	    <menuitemrule class="com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible" />
+     		<menuitemrule class="org.opencms.workplace.explorer.menu.CmsMirSubStandard" />
+     	</menurule>
+    	  </menurules>
