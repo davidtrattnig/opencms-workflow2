@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SpringConfigs>
+<SpringConfigFileLocation>opencms:DataSource.xml</SpringConfigFileLocation>
+	<!-- <SpringConfigFileLocation>opencms:WorkflowEngineBeans.xml</SpringConfigFileLocation> -->
+	<SpringConfigFileLocation>opencms:WorkflowResourceRelationBeans.xml</SpringConfigFileLocation>
+	<SpringConfigFileLocation>opencms:ProjectManagerBeans.xml</SpringConfigFileLocation>
+</SpringConfigs>

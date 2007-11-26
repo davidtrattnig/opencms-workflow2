@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ################################################
+  -	Public Targets to build this OpenCms-Module
+  - Params:
+  -  + module.input.opencms.targets (like "%WORKSPACE%/opencms-commons-CUSTOMER/targets")
+  -  + opencms.workspacefolder (optional default is "opencms-core")
+  -  + target (optional - default is "mysql.local")
+  - 
+  - #################################################-->
+<project name="BP Modules / Workflow2" default="dist" basedir=".">
+
+	<!-- Default Locations -->
+	<property name="module.input" location="${basedir}" />
+	<property name="opencms.commons" location="${basedir}/../opencms-commons" />
+	<property name="opencms.commons.build.xml" location="${opencms.commons}/build-module.xml" />
+	<property file="${opencms.commons}/build-module.properties" />
+	<property name="jar.includes" value="**/*.properties,**/*.txt,**/*.dtd,**/*.xml,**/*.sql,**/*.par" />
+
+	<!-- 
+	  -	Delete all generated Folders and Files. (classes jars and Package-Zip of the given module)
+	  -->
+	<target name="clean" description="Deletes outputs">
+    	<!-- forward the clean-Target opencms-commons/build-module.xml -->
+	  	<ant antfile="${opencms.commons.build.xml}" target="clean" inheritAll="false" >
+  			<property name="module.input" value="${module.input}" />
+  			<property name="opencms.workspacefolder" value="${opencms.workspacefolder}" />
+  	  		<property name="target" value="${target}" />
+  	  		<property name="jar.includes" value="${jar.includes}" />
+	  	</ant>
+	</target>
+
+	<!-- 
+	  -	Compile all classes for the given Module
+	  -->
+	<target name="compile" description="Compiles ${module.name} module classes">
+    	<!-- forward the compile-Target opencms-commons/build-module.xml -->
+	  	<ant antfile="${opencms.commons.build.xml}" target="compile" inheritAll="false" >
+  			<property name="module.input" value="${module.input}" />
+  			<property name="opencms.workspacefolder" value="${opencms.workspacefolder}" />
+  	  		<property name="target" value="${target}" />
+  	  		<property name="jar.includes" value="${jar.includes}" />
+	  	</ant>
+	</target>
+
+	<!-- 
+	  -	Generates the .jar file for module ${module.name}
+	  -->
+	<target name="jar" description="Generates the .jar file for module ${module.name}">
+    	<!-- forward the jar-Target opencms-commons/build-module.xml -->
+	  	<ant antfile="${opencms.commons.build.xml}" target="jar" inheritAll="false" >
+  			<property name="module.input" value="${module.input}" />
+  			<property name="opencms.workspacefolder" value="${opencms.workspacefolder}" />
+  	  		<property name="target" value="${target}" />
+  	  		<property name="jar.includes" value="${jar.includes}" />
+	  	</ant>
+	</target>
+
+	<!-- 
+	  -	Builds the distribution .zip file.
+	  -->
+	<target name="dist" description="Builds the distribution .zip file">
+    	<!-- forward the dist-Target opencms-commons/build-module.xml -->
+	  	<ant antfile="${opencms.commons.build.xml}" target="dist" inheritAll="false" >
+  			<property name="module.input" value="${module.input}" />
+  			<property name="opencms.workspacefolder" value="${opencms.workspacefolder}" />
+  	  		<property name="target" value="${target}" />
+  	  		<property name="jar.includes" value="${jar.includes}" />
+	  	</ant>
+	</target>
+
+	<!-- 
+	  -	Create a Distribution and copies the module resources to Tomcat directories
+	  -->
+	<target name="tomcat.copy" description="Copies module resources to Tomcat directory">
+    	<!-- forward the tomcat.copy-Target opencms-commons/build-module.xml -->
+	  	<ant antfile="${opencms.commons.build.xml}" target="tomcat.copy" inheritAll="false" >
+  			<property name="module.input" value="${module.input}" />
+  			<property name="opencms.workspacefolder" value="${opencms.workspacefolder}" />
+  	  		<property name="target" value="${target}" />
+  	  		<property name="jar.includes" value="${jar.includes}" />
+	  	</ant>
+	</target>
+
+	<!-- 
+	  -	Does a complete recompile of the module and installs it in Tomcat webapps directory
+	  -->
+	<target name="tomcat.all" depends="clean, dist, tomcat.copy" description="Does a complete recompile of the module and installs it in Tomcat webapps directory" >
+    	<!-- forward the tomcat.all-Target opencms-commons/build-module.xml -->
+	  	<ant antfile="${opencms.commons.build.xml}" target="tomcat.all" inheritAll="false" >
+  			<property name="module.input" value="${module.input}" />
+  			<property name="opencms.workspacefolder" value="${opencms.workspacefolder}" />
+  	  		<property name="target" value="${target}" />
+  	  		<property name="jar.includes" value="${jar.includes}" />
+	  	</ant>
+	</target>
+
+	<!-- 
+	  -	Execute Unit Tests and create reports as XML.
+	  - All java-Classes with name "AllTests" will be called
+	  -->
+	<target name="junit" description="Execute Unit Tests">
+    	<!-- forward the junit-Target opencms-commons/build-module.xml -->
+	  	<ant antfile="${opencms.commons.build.xml}" target="junit" inheritAll="false" >
+  			<property name="module.input" value="${module.input}" />
+  			<property name="opencms.workspacefolder" value="${opencms.workspacefolder}" />
+  	  		<property name="target" value="${target}" />
+  	  		<property name="jar.includes" value="${jar.includes}" />
+		</ant>
+	</target>
+
+	<!-- 
+	  -	clear all directories and Files created by the Junit-Task
+	  -->
+	<target name="junit.clear" description="delete output-directories">
+    	<!-- forward the junit.clear-Target opencms-commons/build-module.xml -->
+	  	<ant antfile="${opencms.commons.build.xml}" target="junit.clear" inheritAll="false" >
+  			<property name="module.input" value="${module.input}" />
+  			<property name="opencms.workspacefolder" value="${opencms.workspacefolder}" />
+  	  		<property name="target" value="${target}" />
+  	  		<property name="jar.includes" value="${jar.includes}" />
+		</ant>
+	</target>
+	
+</project>
