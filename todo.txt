@@ -24,3 +24,6 @@ Possible Improvements:
   is performed.
   
 * Merge both message.properties to the one with module package name.
+
+* Additional workflow configuration dialog inside the OpenCms administration
+  panel.
