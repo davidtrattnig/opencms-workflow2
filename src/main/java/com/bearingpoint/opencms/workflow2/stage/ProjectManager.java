@@ -15,10 +15,10 @@ import org.opencms.file.CmsUser;
 import org.opencms.main.CmsException;
 import org.opencms.main.CmsLog;
 import org.opencms.util.CmsUUID;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.bearingpoint.opencms.commons.springmanager.SpringManager;
 import com.bearingpoint.opencms.workflow2.WorkflowException;
+import com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible;
 import com.bearingpoint.opencms.workflow2.stage.dao.I_WorkflowProjectListDAO;
 import com.bearingpoint.opencms.workflow2.stage.domain.WorkflowProject;
 
@@ -121,22 +121,25 @@ public class ProjectManager implements I_ProjectManager {
 	public List<ProjectWrapper> getValidRejectProjects(CmsResource resource) throws WorkflowException {
 
 		CmsUUID projectID = resource.getProjectLastModified();
-		List<ProjectWrapper> allProjects = getAllWorkflowProjects();
 		List<ProjectWrapper> validProjects = new ArrayList<ProjectWrapper>();
 		
-		for (ProjectWrapper project : allProjects) {
-			
-			if (!projectID.toString().equals(project.getId().toString())) {
-				//the resource is rejectable to this project because
-				//it's before the current project:
-				validProjects.add(project);
-			}
-			else {
-				//the current project in the workflow is reached:
-				break;
+		//check if resource hasn't been modified yet:
+		if (!CmsMirPrBelongsToOtherInvisible.DEFAULT_PR_ID.equals(projectID)) {
+			List<ProjectWrapper> allProjects = getAllWorkflowProjects();
+						
+			for (ProjectWrapper project : allProjects) {
+				
+				if (!projectID.toString().equals(project.getId().toString())) {
+					//the resource is rejectable to this project because
+					//it's before the current project:
+					validProjects.add(project);
+				}
+				else {
+					//the current project in the workflow is reached:
+					break;
+				}
 			}
 		}
-		
 		return validProjects;
 	}
 
