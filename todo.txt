@@ -2,7 +2,7 @@ Possible Improvements:
 ---------------------------------------------------------------------
 
 * Project deletion - workflow stages inconsistent (current solution:
-  deleting the workflow stage before deleting a project)
+  deleting the workflow stage before deleting a project). 
   
 * UI Improvement: New stage dialog - stage dropdown should show more
   convenient textual information like "Insert before project xxx", 
@@ -19,9 +19,6 @@ Possible Improvements:
 * Workflow doesn't work for folders
 
 * Approve/Reject dialog: Improve confirmation question
-
-* Review behaviour when resource is locked and a "move to project"
-  is performed.
   
 * Merge both message.properties to the one with module package name.
 

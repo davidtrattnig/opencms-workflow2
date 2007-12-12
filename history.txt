@@ -9,8 +9,11 @@ Legend:
 * Bug fixed
 - General comment
 
+Workflow2 0.3.9 ALHPA1 - December 12, 2007
+* Fixed wrong reject projects issue if resource hasn't been modified yet
+* Fixed lock issue: Now the resource gets unlocked before moving to another project
 
-Workflow2 0.3.7 ALPHA1 - November 7, 2007
+Workflow2 0.3.8 ALPHA1 - November 7, 2007
 - Basic workflow functionality
 - Workflow engine interface definitions
 - Event Listener interface for workflow state changes

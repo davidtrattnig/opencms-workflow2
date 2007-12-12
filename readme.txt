@@ -143,9 +143,6 @@ Stage 0           Stage 1         Stage 2
    Just right-click on a resource within the explorer view and
    select "Approve/Reject".
    
-   Note: It's recommended that the resource is unlocked when you
-   are moving it.       
-
 
 Workflow Engine Interface
 ----------------------------------------------------------------
