@@ -44,6 +44,7 @@ import org.opencms.file.CmsResource;
 import org.opencms.file.CmsResourceFilter;
 import org.opencms.file.CmsUser;
 import org.opencms.jsp.CmsJspActionElement;
+import org.opencms.lock.CmsLock;
 import org.opencms.main.CmsException;
 import org.opencms.main.CmsLog;
 import org.opencms.util.CmsUUID;
@@ -68,7 +69,7 @@ import com.bearingpoint.opencms.workflow2.stage.ProjectWrapper;
  * </ul>
  * <p>
  *
- * @author  David Trattnig  
+ * @author David Trattnig  
  *  
  */
 public class WorkflowMoveToProject extends CmsTouch {
@@ -159,7 +160,7 @@ public class WorkflowMoveToProject extends CmsTouch {
         	
         	CmsProject targetProject = getCms().readProject(new CmsUUID(getParamProject()));
         	LOG.info("WF2| target project uuid: "+targetProject.getUuid().toString());
-        	
+        	        	
         	//backup current project uuid        	
         	CmsProject currentProject = getCms().getRequestContext().currentProject();
         	LOG.info("WF2| current project: "+currentProject.getName());
@@ -167,24 +168,16 @@ public class WorkflowMoveToProject extends CmsTouch {
         	// switch to target project
         	getCms().getRequestContext().setCurrentProject(targetProject);
         	LOG.info("WF2| set current project to target project: "+targetProject.getName());
-        	
-        	//compare with all assigned workflow projects instead of just valid ones (better performance)
-//            for (ProjectWrapper project : wc.getProjectManager().getAllWorkflowProjects()) {
-//
-//            	if (getParamProject().equals(project.getId().toString())) {
-//            		getCms().getRequestContext().setCurrentProject(project.getCmsProject());   
-//            		targetProject = project.getCmsProject();
-//            		LOG.info("WF2| set current project to target project: "+project.getName());
-//            		break;
-//            	}
-//        	}
-            
+        	                    	
             // copy the resource to the current project        
             getCms().copyResourceToProject(getParamResource());
             setParamNewtimestamp(getCurrentDateTime());
             actionTouch();
             LOG.info("WF2| copied resource '"+getParamResource()+"' to current project: "+getCms().getRequestContext().currentProject());
         
+            //unlock resource within the target project
+        	unlockResource(getParamResource());
+            
             // switch back to previous project            
             getCms().getRequestContext().setCurrentProject(currentProject);
             LOG.info("WF2| reset current project to: "+currentProject.getName());
@@ -307,6 +300,25 @@ public class WorkflowMoveToProject extends CmsTouch {
         }
     }
     
-    
+    /**
+     * Unlocks the resource within the target project:
+     * 	1. the lock has to be stolen from the previous user (which is the same but from another project ;-)
+     *  2. the resource has to be unlocked
+     * <p>
+     * 
+     * @param resName
+     * @throws CmsException
+     */
+    protected void unlockResource(String resName) throws CmsException {
+    	
+    	//unlock resource if locked and it is locked by the current user:
+    	CmsLock lock = getCms().getLock(resName);
+    	if (!lock.isUnlocked()) {
+            if (!lock.isNullLock() && lock.isOwnedBy(getCms().getRequestContext().currentUser())) {
+            	getCms().changeLock(resName);
+                getCms().unlockResource(resName);
+            }
+    	}
+    }
 
 }
