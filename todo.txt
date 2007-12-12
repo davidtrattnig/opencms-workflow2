@@ -24,3 +24,13 @@ Possible Improvements:
 
 * Additional workflow configuration dialog inside the OpenCms administration
   panel.
+  
+* Review event management
+
+* Check task titles configuration
+
+* Move default project id to config class
+
+* Review exception handling if an transition is not available
+
+* Review reject action - approve transition taken??
