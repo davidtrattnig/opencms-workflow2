@@ -45,7 +45,8 @@ import org.opencms.workplace.explorer.menu.CmsMenuItemVisibilityMode;
  */
 public class CmsMirPrBelongsToOtherInvisible extends A_CmsMenuItemRule {
 
-	private static final String DEFAULT_PR_ID = "00000000-0000-0000-0000-000000000000";
+	//FIXME extract to config
+	public static final String DEFAULT_PR_ID = "00000000-0000-0000-0000-000000000000";
 	
     /**
      * @see org.opencms.workplace.explorer.menu.I_CmsMenuItemRule#getVisibility(org.opencms.file.CmsObject, CmsResourceUtil[])
