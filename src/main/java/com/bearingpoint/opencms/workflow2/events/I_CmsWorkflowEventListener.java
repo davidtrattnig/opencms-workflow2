@@ -6,6 +6,8 @@ package com.bearingpoint.opencms.workflow2.events;
 import org.opencms.main.I_CmsEventListener;
 
 /**
+ * I_CmsWorkflowEventListener
+ * <p>
  * @author David.Trattnig
  *
  */
