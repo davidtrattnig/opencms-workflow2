@@ -18,6 +18,8 @@
 package com.bearingpoint.opencms.workflow2;
 
 /**
+ * WorkflowException
+ * <p>
  * @author david.trattnig
  * 
  */
