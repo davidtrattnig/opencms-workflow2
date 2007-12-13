@@ -173,7 +173,7 @@ public class WorkflowMoveToProject extends CmsTouch {
             getCms().copyResourceToProject(getParamResource());
             setParamNewtimestamp(getCurrentDateTime());
             actionTouch();
-            LOG.info("WF2| copied resource '"+getParamResource()+"' to current project: "+getCms().getRequestContext().currentProject());
+            LOG.info("WF2| copied resource '"+getParamResource()+"' to current project: "+targetProject.getName());
         
             //unlock resource within the target project
         	unlockResource(getParamResource());
