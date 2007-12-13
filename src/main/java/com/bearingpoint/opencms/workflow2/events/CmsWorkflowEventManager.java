@@ -7,6 +7,8 @@ import org.opencms.main.CmsEvent;
 import org.opencms.main.I_CmsEventListener;
 
 /**
+ * CmsWorkflowEventManager
+ * <p>
  * @author David.Trattnig
  *
  */
