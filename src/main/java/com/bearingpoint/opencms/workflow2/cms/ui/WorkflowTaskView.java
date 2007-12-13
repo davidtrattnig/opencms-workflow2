@@ -163,7 +163,7 @@ public class WorkflowTaskView extends CmsDialog {
     	try {
 			result = new TaskViewResultBean(cms, wc);
 		} catch (Exception e) {
-			LOG.error("Error while retrieving task view results!");
+			LOG.error("Error while retrieving task view results!", e);
 		}
     }
     
