@@ -49,7 +49,7 @@ public class InitWorkflowAction extends A_CmsModuleAction {
     	LOG.debug("*$* start workflow initialization..");    			
         
     	CmsUtil.setCmsObject(adminCms);
-        initEventListener();
+        //initEventListener();
        
         LOG.debug("*$* workflow initialization finished!");
     }
@@ -59,12 +59,12 @@ public class InitWorkflowAction extends A_CmsModuleAction {
      * Assigns the Event Listener for the Workflow Module
      * to perform workflow changes after e.g. publish events.
      */
-    public void initEventListener() {
-    	
-    	//TODO attach proper event listener
-    	//WorkflowEventListener eventListener = new WorkflowEventListener();
-    	//OpenCms.addCmsEventListener(eventListener);  
-    }
+//    public void initEventListener() {
+//    	
+//    	//TODO attach proper event listener
+//    	WorkflowEventListener eventListener = new WorkflowEventListener();
+//    	OpenCms.addCmsEventListener(eventListener);  
+//    }
     
 
         
