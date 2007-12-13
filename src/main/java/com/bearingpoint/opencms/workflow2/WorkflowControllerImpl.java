@@ -10,11 +10,11 @@ import org.opencms.db.CmsPublishList;
 import org.opencms.file.CmsObject;
 import org.opencms.file.CmsProject;
 import org.opencms.file.CmsResource;
+import org.opencms.main.CmsEvent;
 import org.opencms.main.CmsLog;
 import org.opencms.main.I_CmsEventListener;
 import org.opencms.main.OpenCms;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
-import org.springframework.core.io.DefaultResourceLoader;
 
 import com.bearingpoint.opencms.commons.springmanager.SpringManager;
 import com.bearingpoint.opencms.workflow2.engine.I_WorkflowEngine;
@@ -42,7 +42,6 @@ import com.bearingpoint.opencms.workflow2.task.TaskManager;
  */
 public class WorkflowControllerImpl {
 
-//	private static final String SPRING_CONFIG = "src/main/opencms/system/modules/com.bearingpoint.opencms.workflow2/config/spring/spring-config.xml";
 	private static final String SPRING_ENGINE_BEAN = "workflow.workflowEngine";
 	
 	private static boolean engineNotAttached;	
@@ -59,11 +58,7 @@ public class WorkflowControllerImpl {
 	 * Constructor
 	 */
 	protected WorkflowControllerImpl(CmsObject cms) throws WorkflowException {
-		
-//		DefaultResourceLoader drl = new DefaultResourceLoader();		
-//		BeanFactory factory = new XmlBeanFactory(drl.getResource(SPRING_CONFIG));		
-//		_engine = (I_WorkflowEngine) factory.getBean(SPRING_ENGINE_BEAN);
-		
+				
 		try {
 			_engine = (I_WorkflowEngine) SpringManager.getBean(SPRING_ENGINE_BEAN);
 			
@@ -84,13 +79,6 @@ public class WorkflowControllerImpl {
 		_cms = cms;
 		_relationManager = new RelationManager(_engine);				
 		_taskManager = new TaskManager(_cms, _engine, _relationManager);
-
-//		try {
-//			_projectManager = (I_ProjectManager) SpringManager.getBean(SPRING_PROJECTMANAGER_BEAN);
-//		}
-//		catch (NoSuchBeanDefinitionException e) {
-//			LOG.fatal("Could not instantiate project manager", e);
-//		}
 		_projectManager = new ProjectManager(cms);
 			
 		//register eventlistener to verify the integrity of the 
@@ -158,7 +146,7 @@ public class WorkflowControllerImpl {
 				
 		String message = WorkflowConfiguration.getDefaultTaskMessage();
 		I_Task defaultTask = new Task(targetProject.getUuid(), resource.getUserLastModified(), "dummyTITLE", message);		
-		actionApproveWithTask(resource, targetProject, defaultTask);				
+		actionApproveWithTask(resource, targetProject, defaultTask);					
 	}
 	
 	//transactional
@@ -174,6 +162,7 @@ public class WorkflowControllerImpl {
 		catch (WorkflowTransitionNotAvailableException e) {
 			throw new WorkflowPublishNotPermittedException("There is no publish transition for the current workflow state", e);
 		}
+		
 	}
 	
 	//transactional
