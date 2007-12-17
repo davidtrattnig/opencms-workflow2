@@ -115,7 +115,8 @@ public class Task implements Serializable, I_Task {
     	}
     	
     	this.taskTitle = title;
-    	this.comments = new ArrayList<TaskComment>();    	
+    	this.comments = new ArrayList<TaskComment>();   
+    	this.createDate = new GregorianCalendar();
     }
     
     /**
