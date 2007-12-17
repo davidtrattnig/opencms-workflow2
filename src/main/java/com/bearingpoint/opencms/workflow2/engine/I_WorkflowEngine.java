@@ -15,7 +15,7 @@ import com.bearingpoint.opencms.workflow2.task.TaskInstance;
 /**
  * I_WorkflowEngine
  * <p>
- * Interface to implement the workflow engine e.g. jBPM
+ * Interface to implement the workflow engine delegations/interaction methods.
  * <p>
  * @author David.Trattnig
  */
