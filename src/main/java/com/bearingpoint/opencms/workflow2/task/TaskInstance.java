@@ -81,8 +81,14 @@ public class TaskInstance {
 		return false;
 	}
 	
+	/**
+	 * Retrieves the date the task has been created.
+	 * <p>
+	 * @return Date as String for presentation
+	 */
 	public String getCreateDate() {
-		
+				
+		//TODO insert date presentation rules
 		return taskData.getCreateDate().toString();
 	}
 	
@@ -99,16 +105,20 @@ public class TaskInstance {
 	
 	public String getUserName() {
 		
-		try {
-		return CmsUtil.getCmsObject()
-						.readUser(taskData.getUserUUID()).toString();
+		if (!getPooled()) {
+			try {
+			return CmsUtil.getCmsObject()
+							.readUser(taskData.getUserUUID()).toString();
+			}
+			catch (CmsException e) {
+	//			TODO add log entry? + make configurable
+				LOG.error("invalid user", e);
+				return "invalid user";
+			}
 		}
-		catch (CmsException e) {
-//			TODO add log entry? + make configurable
-			LOG.error("invalid user", e);
-			return "invalid user";
+		else {
+			return "";
 		}
-		
 	}
 	
 	public String getAssignedUserName() {
