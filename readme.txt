@@ -95,7 +95,7 @@ Installation
    	   
    	   		"com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible"    
    	   		
-   	   	  This rule deactives the regarding context menu items if the refering resource 
+   	   	  This rule deactivates the regarding context menu items if the refering resource 
    	   	  doesn't belong to the current project.  
    	   	  
    	   	  For example this type of rule would be 
@@ -148,7 +148,7 @@ Workflow Engine Interface
 ----------------------------------------------------------------
 
 Task functionalities are just available if an 3rd party 
-workflow engine or an self implmented engine is attached.
+workflow engine or an self implemented engine is attached.
 
 To attach a third party workflow engine (e.g. JBoss JBPM) 
 the workflow2 module provides an interface to be implemented:
