@@ -19,25 +19,6 @@ import com.bearingpoint.opencms.workflow2.relation.ResourceIdentifier;
 public interface I_Task {
 
 	
-//	public static enum STATE {
-//		
-//	    /**
-//	     * STATE_POOLED means that the task is assigned to the whole group
-//	     */
-//		STATE_POOLED,
-//		
-//	    /**
-//	     * STATE_ACCEPTED means that the task is assigned to a specific user
-//	     */
-//		STATE_ACCEPTED,
-//		
-//	    /**
-//	     * STATE_LOOSE means that the task has an invalid assignment 
-//	     * e.g. the assigned user/group has been deleted meanwhile 
-//	     */
-//		STATE_LOOSE
-//	};
-	
 	/**
 	 * @return the assignedUserUUID
 	 */
@@ -52,11 +33,6 @@ public interface I_Task {
 	 * @return the createDate
 	 */
 	public abstract Calendar getCreateDate();
-
-	/**
-	 * @return the resource
-	 */
-	//public abstract ResourceIdentifier getResource();
 
 	/**
 	 * @return the taskTitle
