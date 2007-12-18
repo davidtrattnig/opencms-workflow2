@@ -177,6 +177,52 @@ methods to the engine.
    d) Save & Exit editor + publish VFS resource.
 4. Restart OpenCms Server
 
+Event Handling
+----------------------------------------------------------------
+
+(A) Integrated Events
+
+	EVENT_WORKFLOW_STARTED
+	EVENT_WORKFLOW_TRANSITION_APPROVED
+	EVENT_WORKFLOW_TRANSITION_REJECTED
+	EVENT_WORKFLOW_FINISHED
+	EVENT_WORKFLOW_TASK_CREATED
+	EVENT_WORKFLOW_TASK_ASSIGNED
+	EVENT_WORKFLOW_TASK_POOLED
+	EVENT_WORKFLOW_TASK_FINISHED
+	EVENT_WORKFLOW_TASK_COMMENTED
+	EVENT_WORKFLOW_RESOURCE_MOVED
+
+
+(B) Releasing Events
+
+This workflow module contains a class which offers a simple approach to fire
+workflow related events. Due to consistency this module designed that workflow events
+are fired within your workflow engine implementation. To fire an event just use
+the static class
+
+	com.bearingpoint.opencms.workflow2.events.WorkflowEventGun
+	
+For example if you want your workflow engine implementation to fire an event
+notifying the listeners that a workflow (JBPM term: process instance) has been
+created just call:
+
+	WorkflowEventGun.fireEventWorkflowStarted(Long workflowID); 
+
+
+(C) Catching/Listening to Events
+
+OpenCms Workflow2 provides an interface for listening
+to both OpenCms Events and Workflow2 Events:
+
+	I_CmsWorkflowEventListener extends I_CmsEventListener
+
+To get notified when an event happens you have to register your 
+implementation of the event listener:
+
+	OpenCms.addCmsEventListener(yourListenerInstance);
+
+
 FAQ
 ----------------------------------------------------------------
 Q: When importing any of these OpenCms Modules I receive an error
