@@ -12,7 +12,7 @@
 		<name>com.bearingpoint.opencms.workflow2</name>
 		<nicename><![CDATA[BearingPoint Workflow2 Core Module]]></nicename>
 		<group>BearingPoint Module</group>
-		<class></class>
+		<class>com.bearingpoint.opencms.workflow2.InitWorkflowAction</class>
 		<description><![CDATA[BearingPoint Workflow2 Core Module]]></description>
 		<version>0.4.0</version>
 		<authorname><![CDATA[David Trattnig]]></authorname>
