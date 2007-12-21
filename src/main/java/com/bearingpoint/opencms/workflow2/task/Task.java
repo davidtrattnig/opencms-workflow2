@@ -50,7 +50,7 @@ public class Task implements Serializable, I_Task {
 	/**
 	 * The date the task has been created. 
 	 */
-	private Calendar createDate;
+	//private Calendar createDate;
 	
 	/** 
 	 * user created the task 
@@ -78,7 +78,7 @@ public class Task implements Serializable, I_Task {
     public Task(CmsUUID projectUUID, CmsUUID userUUID, String title, List<TaskComment> comments) {
     	      
     	this.taskTitle = title;     
-        this.createDate = new GregorianCalendar();      
+        //this.createDate = new GregorianCalendar();      
         this.userUUID = userUUID;
         this.projectUUID = projectUUID;
         this.comments = new ArrayList<TaskComment>();
@@ -115,8 +115,7 @@ public class Task implements Serializable, I_Task {
     	}
     	
     	this.taskTitle = title;
-    	this.comments = new ArrayList<TaskComment>();   
-    	this.createDate = new GregorianCalendar();
+    	this.comments = new ArrayList<TaskComment>();       	    
     }
     
     /**
@@ -176,9 +175,9 @@ public class Task implements Serializable, I_Task {
 	/* (non-Javadoc)
 	 * @see com.bearingpoint.opencms.workflow2.task.I_Task#getCreateDate()
 	 */
-	public Calendar getCreateDate() {
-		return createDate;
-	}
+//	public Calendar getCreateDate() {
+//		return createDate;
+//	}
 
 
 	/* (non-Javadoc)
@@ -188,7 +187,6 @@ public class Task implements Serializable, I_Task {
 //		return resource;
 //	}
 
-
 	/* (non-Javadoc)
 	 * @see com.bearingpoint.opencms.workflow2.task.I_Task#getTaskTitle()
 	 */
@@ -196,34 +194,13 @@ public class Task implements Serializable, I_Task {
 		return taskTitle;
 	}
 
-
 	/* (non-Javadoc)
 	 * @see com.bearingpoint.opencms.workflow2.task.I_Task#getUserUUID()
 	 */
 	public CmsUUID getUserUUID() {
 		return userUUID;
 	}
-     
-	/* (non-Javadoc)
-	 * @see com.bearingpoint.opencms.workflow2.task.I_Task#getDueDate()
-	 */
-	public Date getDueDate() throws TaskException {
-		
-		Calendar calendar = (Calendar) createDate.clone();
-        int dueDateDays = 0;
-        
-        try {
-            dueDateDays = WorkflowConfiguration.getTaskDueDateDays();
-        }
-        catch (Exception e) {
-            LOG.error("Couldn't load due-date-days from workflow configuration", e);
-            throw new TaskException ("Couldn't load due-date-days from workflow configuration", e);
-        }
-        
-        calendar.add(GregorianCalendar.DAY_OF_MONTH, dueDateDays);
-        return calendar.getTime(); 
-	}
-	
+     	
 	/* (non-Javadoc)
 	 * @see com.bearingpoint.opencms.workflow2.task.I_Task#getProjectUUID()
 	 */

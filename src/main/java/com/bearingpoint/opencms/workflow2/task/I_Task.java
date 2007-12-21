@@ -32,7 +32,7 @@ public interface I_Task {
 	/**
 	 * @return the createDate
 	 */
-	public abstract Calendar getCreateDate();
+//	public abstract Calendar getCreateDate();
 
 	/**
 	 * @return the taskTitle
@@ -48,7 +48,7 @@ public interface I_Task {
 	 * @return due date
 	 * @throws TaskException
 	 */
-	public abstract Date getDueDate() throws TaskException;
+//	public abstract Date getDueDate() throws TaskException;
 	
 	/**
 	 * Retrieves the project the task is assigned to
