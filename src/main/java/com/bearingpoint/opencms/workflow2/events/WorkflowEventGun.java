@@ -9,9 +9,6 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.opencms.main.CmsLog;
 import org.opencms.main.OpenCms;
-import org.opencms.util.CmsUUID;
-
-import com.bearingpoint.opencms.workflow2.InitWorkflowAction;
 
 /**
  * WorkflowEventGun
