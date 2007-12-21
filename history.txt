@@ -9,10 +9,11 @@ Legend:
 * Bug fixed
 - General comment
 
-Workflow2 0.4.0 ALPHA2 - December xx, 2007
-* Improved Event Handling. Added utility class 'WorkflowEventGun' to fire workflow related events
-* Fixed create date null-pointer issue
+Workflow2 0.4.0 ALPHA2 - December 21, 2007
+* Added module initialization class to manifest
+* Fixed task create date issue, reimplemented as engine responsibility (task instance)
 * Fixed pooled user issue
+- Improved Event Handling. Added utility class 'WorkflowEventGun' to fire workflow related events
 - Extended logging
 
 Workflow2 0.3.9 ALHPA1 - December 12, 2007
