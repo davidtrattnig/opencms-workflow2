@@ -102,38 +102,53 @@ public class TaskInstance {
 		return sdf.format(createDate.getTime());
 	}
 		
+	/**
+	 * Retrieves the user (name) created this task.
+	 * <p>
+	 * @return username
+	 */
 	public String getUserName() {
 		
-		if (!getPooled()) {
 			try {
 			return CmsUtil.getCmsObject()
 							.readUser(taskData.getUserUUID()).toString();
 			}
-			catch (CmsException e) {
-	//			TODO add log entry? + make configurable
+			catch (Exception e) {
+				//TODO "beautifulize"
 				LOG.error("invalid user", e);
-				return "invalid user";
+				return "<span style=\"color:red;\">INVALID USER!</span>";
+			}
+
+	}
+	
+	/**
+	 * Retrieves the name of the user assigned to 
+	 * this task.
+	 * <p>
+	 * @return username
+	 */
+	public String getAssignedUserName() {
+		
+		if (!getPooled()) {
+			try {
+				return CmsUtil.getCmsObject()
+								.readUser(taskData.getAssignedUserUUID()).toString();
+			}
+			catch (Exception e) {
+				return "";
 			}
 		}
 		else {
 			return "";
-		}
-	}
-	
-	public String getAssignedUserName() {
-		
-		try {
-			return CmsUtil.getCmsObject()
-							.readUser(taskData.getAssignedUserUUID()).toString();
-			}
-			catch (Exception e) {
-				if (LOG.isDebugEnabled()) {
-					LOG.debug("no valid user assigned to task #"+this.getId());
-				}
-				return "";
-			}
+		}			
 	}
 
+	/**
+	 * Retrieves the name of the project this task 
+	 * belongs to.
+	 * <p>
+	 * @return project name
+	 */
 	public String getProjectName() {
 		
 		try {
@@ -141,6 +156,7 @@ public class TaskInstance {
 							.readProject(taskData.getProjectUUID()).getName();
 		}
 		catch (CmsException e) {
+			//TODO "beautifulize"
 			LOG.error("invalid project", e);
 			return "<span style=\"color:red\">INVALID PROJECT!</span>";
 		}
