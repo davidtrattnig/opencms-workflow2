@@ -9,6 +9,10 @@ Legend:
 * Bug fixed
 - General comment
 
+Workflow2 0.4.1 ALPHA2 - xxx 2008
+* Date Format fixed
+* Fixed several task view issues
+
 Workflow2 0.4.0 ALPHA2 - December 21, 2007
 * Added module initialization class to manifest
 * Fixed task create date issue, reimplemented as engine responsibility (task instance)
