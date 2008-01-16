@@ -4,6 +4,7 @@
 package com.bearingpoint.opencms.workflow2.task;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -97,8 +98,8 @@ public class TaskInstance {
 	public String getCreateDate() {
 				
 		//TODO insert date presentation rules		
-		DateFormat df = DateFormat.getDateInstance();
-		return df.format(createDate);
+		DateFormat sdf = SimpleDateFormat.getDateInstance();
+		return sdf.format(createDate.getTime());
 	}
 		
 	public String getUserName() {
