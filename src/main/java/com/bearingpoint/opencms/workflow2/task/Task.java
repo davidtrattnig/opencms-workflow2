@@ -110,7 +110,14 @@ public class Task implements Serializable, I_Task {
     		this.assignedUserUUID = null;
     	}
     	
-    	this.userUUID = new CmsUUID(previousUser);
+    	try {
+    		this.userUUID = new CmsUUID(previousUser);
+    	}
+    	catch (NullPointerException e) {
+    		this.userUUID = null;
+    		LOG.warn("There may be a problem with task '"+title+"' - id is null");
+    	}
+    	
     	this.taskTitle = title;
     	this.comments = new ArrayList<TaskComment>();       	    
     }
