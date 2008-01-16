@@ -77,6 +77,10 @@ body {
 	background-color:ThreedFace; 
 }
 
+#info {
+	color: gray;	
+}
+
 .section, .column {
   background-color:ThreedFace; 
   border-right: 1px solid ThreedDarkShadow; 
@@ -96,10 +100,17 @@ body {
 .taskdata, .firsttask {
 	padding-left:5px;
 	padding-right:5px;
+	border-right:1px solid gray;
 }
 
 .firsttask {
-	border-top:1px dashed gray;
+	border-top:1px dotted gray;
+}
+
+#tasktable {
+	margin: 0px;
+	padding: 0px;
+	width:100%;
 }
 
 </style>
@@ -118,10 +129,11 @@ body {
 	</c:if>
 
 	<c:if test="${result.isWorkflowEngineAttached == true}">
-	    <h1>${result.headline}</h1>
-		<table width="100%" cellpadding="0" cellspacing="0">		
+
+		<table width="100%" cellpadding="0" cellspacing="0" id="tasktable">	
+			
 			<tr>
-				<th class="column"><span class="starttab"><span style="width: 1px; height: 1px;"/></span></th>
+				<th class="column"><span class="starttab"><span style="width: 1px; height: 1px;"></span></span></th>
 				<th class="column">Date</th>
 		        <th class="column">Due Date</th>
 				<th class="column">From</th>
@@ -131,117 +143,23 @@ body {
 				<th class="column">-delete(admin)-</th>
 			</tr>
 				
-				<!--		
-			<c:forEach var="task" items="${result.userTasks}" varStatus="status">    		    				
-			<tr class="task${status.index%2}">
-
-				<c:if test="${status.first}">
-			    	<th rowspan="${fn:length(result.userTasks)}" class="section">Your Tasks:</th>
-			    </c:if>
-			    
-				<td class="taskdata">${task.createDate}</td>
-				<td class="taskdata">${task.dueDate}</td>
-				<td class="taskdata">${task.userName}</td>
-				<td class="taskdata" style="color:green;">${task.data.taskTitle}</td>
-				<td class="taskdata"></td>
-				<td class="taskdata">
-					<c:if test="${task.assignedUserName == null}">
-						Pooled within ${task.projectName} - <a href="#">Take!</a>
-					</c:if>
-					<c:if test="${task.assignedUserName != null}">
-						Assigned to ${task.projectName} - <a href="#">Pool!</a>
-					</c:if>
-				</td>
-				<td class="taskdata"></td>
-			</tr>
-			</c:forEach>
-						
-			<c:forEach var="task" items="${result.pooledTasks}" varStatus="status">    		    				
-			<tr class="task${status.index%2}">
-				
-				<c:if test="${status.first}">
-			    	<th rowspan="${fn:length(result.pooledTasks)}" class="section">Pooled Tasks:</th>
-			    </c:if>
-			    
-				<td class="taskdata">${task.createDate}</td>
-				<td class="taskdata">${task.dueDate}</td>
-				<td class="taskdata">${task.userName}</td>
-				<td class="taskdata" style="color:green;">${task.data.taskTitle}</td>
-				<td class="taskdata"></td>
-				<td class="taskdata">
-					<c:if test="${task.assignedUserName == null}">
-						Pooled within ${task.projectName} - <a href="#">Take!</a>
-					</c:if>
-					<c:if test="${task.assignedUserName != null}">
-						Assigned to ${task.projectName} - <a href="#">Pool!</a>
-					</c:if>
-				</td>
-				<td class="taskdata"></td>
-			</tr>
-			</c:forEach>
-					
-			<c:if test="${fn:length(result.managerTasks) == 0}">
-			<tr class="task0">
-				<th class="section">Manager Tasks:</th><td colspan="7" style="border-top:1px solid black">No tasks available!</td>
-			</tr>
-			</c:if>
-									
-			<c:forEach var="task" items="${result.managerTasks}" varStatus="status">    		    				
-			<tr class="task${status.index%2}">
-
-				<c:if test="${status.first}">
-			    	<th rowspan="${fn:length(result.managerTasks)}" class="section">Manager Tasks:</th>
-			    </c:if>
-			    
-				<td class="taskdata" <c:if test="${status.first}"></c:if>>${task.createDate}</td>
-				<td class="taskdata" <c:if test="${status.first}">style="border-top:1px solid black"</c:if>>${task.dueDate}</td>
-				<td class="taskdata" <c:if test="${status.first}">style="border-top:1px solid black"</c:if>>${task.userName}</td>
-				<td class="taskdata" style="color:green;">${task.data.taskTitle}</td>
-				<td class="taskdata"></td>
-				<td class="taskdata">
-					<c:if test="${task.assignedUserName == null}">
-						Pooled within ${task.projectName} - <a href="#">Take!</a>
-					</c:if>
-					<c:if test="${task.assignedUserName != null}">
-						Assigned to ${task.projectName} - <a href="#">Pool!</a>
-					</c:if>
-				</td>
-				<td class="taskdata"></td>
-			</tr>
-			</c:forEach>
+			<c:set var="section" value="Your Tasks" scope="request" />
+			<c:set var="tasks" value="${result.userTasks}" scope="request" />
+			<cms:include page="tasksection.inc.jsp" />	
 			
-			<c:if test="fn:length(result.otherTasks) == 0">
-				<th class="section">Other Tasks:</th><td colspan="7">No task available!</td>
-			</c:if>
-			
-			<c:forEach var="task" items="${result.otherTasks}" varStatus="status">    		    				
-			<tr class="task${status.index%2}">
-			
-				<c:if test="${status.first}">
-			    	<th rowspan="${fn:length(result.otherTasks)}" class="section">Other Tasks:</th>
-			    </c:if>
-			    			    
-				<td <c:if test="${!status.first}">class="taskdata"</c:if><c:if test="${status.first}">class="firsttask"</c:if>>${task.createDate}</td>
-				<td <c:if test="${!status.first}">class="taskdata"</c:if><c:if test="${status.first}">class="firsttask"</c:if>>${task.dueDate}</td>
-				<td <c:if test="${!status.first}">class="taskdata"</c:if><c:if test="${status.first}">class="firsttask"</c:if>>${task.userName}</td>
-				<td <c:if test="${!status.first}">class="taskdata"</c:if><c:if test="${status.first}">class="firsttask"</c:if>>${task.data.taskTitle}</td>
-				<td <c:if test="${!status.first}">class="taskdata"</c:if><c:if test="${status.first}">class="firsttask"</c:if>>&nbsp;</td>
-				<td <c:if test="${!status.first}">class="taskdata"</c:if><c:if test="${status.first}">class="firsttask"</c:if>>
-					<c:if test="${task.assignedUserName == null}">
-						Pooled within ${task.projectName} - <a href="#">Take!</a>
-					</c:if>
-					<c:if test="${task.assignedUserName != null}">
-						Assigned to ${task.projectName} - <a href="#">Pool!</a>
-					</c:if>
-				</td>
-				<td  <c:if test="${!status.first}">class="taskdata"</c:if><c:if test="${status.first}">class="firsttask"</c:if>>&nbsp;</td>
-			</tr>
-			</c:forEach>-->
+			<c:set var="section" value="Tasks in your projects" scope="request" />
+			<c:set var="tasks" value="${result.pooledTasks}" scope="request" />
+			<cms:include page="tasksection.inc.jsp" />	
 
+			<c:set var="section" value="Manager Tasks" scope="request" />
+			<c:set var="tasks" value="${result.managerTasks}" scope="request" />
+			<cms:include page="tasksection.inc.jsp" />	
+			
 			<c:set var="section" value="Other Tasks" scope="request" />
 			<c:set var="tasks" value="${result.otherTasks}" scope="request" />
 			<cms:include page="tasksection.inc.jsp" />				
-		</table>			
+		</table>	
+		<p id="info">${result.headline}</p>		
 	</c:if>	
 	</div>
 </form>
