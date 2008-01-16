@@ -14,7 +14,7 @@
 		<group>BearingPoint Module</group>
 		<class>com.bearingpoint.opencms.workflow2.InitWorkflowAction</class>
 		<description><![CDATA[BearingPoint Workflow2 Core Module]]></description>
-		<version>0.4.0</version>
+		<version>0.4.1</version>
 		<authorname><![CDATA[David Trattnig]]></authorname>
 		<authoremail><![CDATA[david.trattnig@bearingpoint.com]]></authoremail>
 		<datecreated/>
@@ -343,6 +343,23 @@
 			</properties>
 			<accesscontrol/>
 		</file>
+		<file>
+			<source>system/modules/com.bearingpoint.opencms.workflow2/ui/tasksection.inc.jsp</source>
+			<destination>system/workplace/views/workflow/tasksection.inc.jsp</destination>
+			<type>jsp</type>
+			<datelastmodified>Mon, 24 Apr 2006 07:30:03 GMT</datelastmodified>
+			<userlastmodified>Admin</userlastmodified>
+			<datecreated>Wed, 22 Mar 2006 15:07:10 GMT</datecreated>
+			<usercreated>Admin</usercreated>
+			<flags>0</flags>
+			<properties>
+				<property type="shared">
+					<name>export</name>
+					<value><![CDATA[false]]></value>
+				</property>
+			</properties>
+			<accesscontrol/>
+		</file>		
 		<file>
 			<source>system/modules/com.bearingpoint.opencms.workflow2/ui/taskdetails.jsp</source>
 			<destination>system/workplace/views/workflow/taskdetails.jsp</destination>
