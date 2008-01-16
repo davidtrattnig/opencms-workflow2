@@ -38,3 +38,5 @@ Possible Improvements:
 * Review publish online handling
 
 * insert date presentation rules?
+
+* check due date handling
