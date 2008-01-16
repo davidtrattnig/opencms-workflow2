@@ -109,15 +109,15 @@ public class TaskInstance {
 	 */
 	public String getUserName() {
 		
-			try {
+		try {
 			return CmsUtil.getCmsObject()
-							.readUser(taskData.getUserUUID()).toString();
-			}
-			catch (Exception e) {
-				//TODO "beautifulize"
-				LOG.error("invalid user", e);
-				return "<span style=\"color:red;\">INVALID USER!</span>";
-			}
+							.readUser(taskData.getUserUUID()).getFullName();
+		}
+		catch (Exception e) {
+			//TODO "beautifulize"
+			LOG.error("invalid user", e);
+			return "<span style=\"color:red;\">INVALID USER!</span>";
+		}
 
 	}
 	
