@@ -46,12 +46,7 @@ public class Task implements Serializable, I_Task {
 	 * List of comments the task is containing
 	 */
 	private List<TaskComment> comments;
-		
-	/**
-	 * The date the task has been created. 
-	 */
-	//private Calendar createDate;
-	
+			
 	/** 
 	 * user created the task 
 	 */
@@ -94,11 +89,12 @@ public class Task implements Serializable, I_Task {
     /**
      * Constructor to create tasks via workflow engine implementation.
      * <p>
+     * @param previousUser
      * @param project
      * @param user
      * @param title
      */
-    public Task(String project, String user, String title) {
+    public Task(String previousUser, String project, String user, String title) {
     	
     	if (project!=null && project.length()>0) {
     		this.projectUUID = new CmsUUID(project);
@@ -108,12 +104,13 @@ public class Task implements Serializable, I_Task {
     	}
     	
     	if (user!=null && user.length()>0) {
-    		this.userUUID = new CmsUUID(user);
+    		this.assignedUserUUID = new CmsUUID(user);
     	}
     	else {
-    		this.userUUID = null;
+    		this.assignedUserUUID = null;
     	}
     	
+    	this.userUUID = new CmsUUID(previousUser);
     	this.taskTitle = title;
     	this.comments = new ArrayList<TaskComment>();       	    
     }
@@ -132,24 +129,7 @@ public class Task implements Serializable, I_Task {
     	this(projectUUID, userUUID, title, new ArrayList<TaskComment>());
     	comments.add(new TaskComment(this, userUUID, comment));
     }
-    
-    /**
-     * Constructor for creating default tasks (default message). 
-     * The message is provided by the WorkflowConfiguration.
-     * @param resource
-     * @param userUUID
-     */
-//    public Task(ResourceIdentifier resource, CmsUUID userUUID, String title) {
-//    	
-//    	this.taskTitle = title;
-//    	this.resource = resource;       
-//        this.createDate = new GregorianCalendar();      
-//        this.userUUID = userUUID;
-//    	String comment = WorkflowConfiguration.getDefaultTaskMessage();
-//        comments = new LinkedList<TaskComment>();
-//        comments.add(new TaskComment(this, userUUID, comment));                     
-//    }
-    
+        
     /**
      * Private default constructor.
      */
