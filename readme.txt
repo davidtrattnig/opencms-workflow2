@@ -50,8 +50,27 @@ System Requirements
         opencmsmodule-com.bearingpoint.opencms.commons 
         opencmsmodule-com.bearingpoint.opencms.commons.springmanager
     	
-    
-Installation
+
+Quick & Default Installation
+----------------------------------------------------------------
+
+This type of installation is intended for OpenCms systems which 
+are fresh and clean or have no need for special configuration.
+As precondition you need the Workflow2 all in one package.
+
+1. Import the commons, springmanager and workflow2 module via 
+   OpenCms module import mechanism.
+2. Copy opencms-workplace.xml to %OPENCMS_DIR%\WEB-INF\config\ 
+   (replace current configuration)
+3. Restart your server. Voilá!
+
+By default the Workflow2 module uses your OpenCms database connection
+properties. If you don't want your Workflow2 tables stored there have
+a look at the database configuration chapter of the "Advanced Installation"
+section.
+
+
+Advanced Installation
 ----------------------------------------------------------------
 
 1. Build the workflow2 module
@@ -60,19 +79,34 @@ Installation
 4. Declare your new database inside the workflow2 spring configuration:
        a) Inside the OpenCms workbench switch to the root ("/") view
        b) Edit /system/modules/com.bearingpoint.opencms.workflow2/config/spring/DataSource.xml
-       c) Configure the database connection section (URL, user, password):
-       
-          <bean id="workflow.dataSource" 
-                  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-
-            <property name="driverClassName"><value>com.mysql.jdbc.Driver</value></property>
-            <property name="url"><value>jdbc:mysql://localhost:3306/workflow2?useServerPrepStmts=false&amp;jdbcCompliantTruncation=false</value></property>
-            <property name="username"><value>root</value></property>
-            <property name="password"><value>rootx</value></property>
-          </bean>
+       c) By Default the current OpenCms database connection properties are used.
+          If you have the need for a different database location or settings
+          have a look at the workflow.datasource bean. Here you can easily overwrite
+          certain parameters:
+          
+              <bean id="workflow.dataSource" class="com.bearingpoint.opencms.workflow2.WorkflowDataSource">
+				<!-- 
+					INSERT ADDITIONAL INITIALIZATIONS HERE 
+					BY DEFAULT THE PARAMETERS ARE READ FROM opencms.properties
+				
+					EXAMPLE PROPERTIES ARE:
+					<property name="driverClassName"><value>com.mysql.jdbc.Driver</value></property>
+	                <property name="url"><value>jdbc:mysql://localhost:3306/workflow2?useServerPrepStmts=false&amp;jdbcCompliantTruncation=false</value></property>
+	                <property name="username"><value>root</value></property>
+	                <property name="password"><value>root</value></property>
+                -->
+		      </bean>          
        
        d) In some cases you also have to change the Hibernate settings within
           this file (Especially when you are using an database other than MySQL)
+          
+          By default this configuration does not set a Hibernate Dialect. If you
+          are using special database environments or if you are facing problems 
+          regarding Hibernate and database I recommend to set at least a Hibernate
+          dialect within the Hibernate section, which could look like this:
+          
+          	<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop> 
+          
        e) Save and quit the editor. Publish the VFS resource.
        
 5. Configure the opencms-workplace.xml for new context menu entries to approve/reject resources
