@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import org.apache.commons.logging.Log;
+import org.opencms.file.CmsUser;
 import org.opencms.main.CmsException;
 import org.opencms.main.CmsLog;
 
@@ -110,8 +111,9 @@ public class TaskInstance {
 	public String getUserName() {
 		
 		try {
-			return CmsUtil.getCmsObject()
-							.readUser(taskData.getUserUUID()).getFullName();
+			CmsUser user = CmsUtil.getCmsObject()
+							.readUser(taskData.getUserUUID());
+			return user.getFullName();
 		}
 		catch (Exception e) {
 			//TODO "beautifulize"
