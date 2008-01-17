@@ -16,7 +16,8 @@ Possible Improvements:
 
 * Multi-Selection of resources
 
-* Workflow doesn't work for folders
+* Workflow doesn't work for folders / how should workflows apply to folders
+  and its contents?
 
 * Approve/Reject dialog: Improve confirmation question
   
@@ -40,3 +41,7 @@ Possible Improvements:
 * insert date presentation rules?
 
 * check due date handling
+
+* Dynamically create context menu rules
+
+* Use OpenCms DB by default
