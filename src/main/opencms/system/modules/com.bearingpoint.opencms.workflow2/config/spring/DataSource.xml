@@ -2,22 +2,31 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <!--
-	Bean Mapping Workflow-CMS Database
+	BEAN MAPPING FOR DATASOURCES
 -->
-<!-- org.gjt.mm.mysql.Driver -->
 
 <beans>
-    <!-- MySQL -->
-    <bean id="workflow.dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <!-- DATASOURCE CONFIGURATION -->
+    
+    <bean id="workflow.dataSource" class="com.bearingpoint.opencms.workflow2.WorkflowDataSource">
+		<!-- 
+			INSERT ADDITIONAL INITIALIZATIONS HERE 
+			BY DEFAULT THE PARAMETERS ARE READ FROM opencms.properties
+		-->
+    </bean>
+    
+    <!-- USE THIS BEAN IF YOU DON'T WANT HIBERNATE USING YOUR CURRENT OPENCMS DATABASE 
+         (IN CASE DON'T FORGET TO DELETE THE BEAN ABOVE) -->
+    <!--<bean id="workflow.dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 
         <property name="driverClassName"><value>com.mysql.jdbc.Driver</value></property>
         <property name="url"><value>jdbc:mysql://localhost:3306/workflow2?useServerPrepStmts=false&amp;jdbcCompliantTruncation=false</value></property>
         <property name="username"><value>root</value></property>
         <property name="password"><value>rootx</value></property>
 
-    </bean>
+    </bean>-->
     
-	<!-- Hibernate Setup MySQL -->
+	<!-- HIBERNATE SETUP -->
 	<bean id="workflow.sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<property name="dataSource">
@@ -26,10 +35,14 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				<prop key="hibernate.dialect">
-					org.hibernate.dialect.MySQLDialect
-				</prop>
+				
+				<!-- SET THE HIBERNATE DIALECT IF YOU HAVE A SPECIAL ENVIRONMENT OR
+					 IF YOU ARE FACING PROBLEMS WHEN ACCESSING THE DATABASE: -->
+				 
+				<!-- <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop> -->
 				<!-- <prop key="hibernate.dialect">org.hibernate.dialect.MySQLMyISAMDialect</prop> -->
+				
+				<!-- FOR CERTAIN DATABASE YOU HAVE TO SET A SUBSITUTION FOR TRUE/FALSE VALUES: -->
 				<!-- <prop key="hibernate.query.substitutions">true 1, false 0</prop> -->
 			</props>
 		</property>
