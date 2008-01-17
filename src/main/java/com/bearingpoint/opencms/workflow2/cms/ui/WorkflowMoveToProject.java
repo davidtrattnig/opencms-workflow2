@@ -165,6 +165,10 @@ public class WorkflowMoveToProject extends CmsTouch {
         	CmsProject currentProject = getCms().getRequestContext().currentProject();
         	LOG.info("WF2| current project: "+currentProject.getName());
         	
+        	//touch resource before moving to ensure
+        	//correct project assignment:
+        	actionTouch();
+        	
         	// switch to target project
         	getCms().getRequestContext().setCurrentProject(targetProject);
         	LOG.info("WF2| set current project to target project: "+targetProject.getName());
