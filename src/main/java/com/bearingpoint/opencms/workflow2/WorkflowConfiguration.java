@@ -18,7 +18,7 @@ public class WorkflowConfiguration {
 	public static int TASK_DUE_DATE_DAYS = 5;
 	public static String TASK_DEFAULT_MESSAGE = "Please review the resource attached to this task";
 	public static String TASK_DEFAULT_TITLE = "New resource %1 in project %2";
-	
+		
 	
 	/**
 	 * Checks if the workflow functionality is switched on.
