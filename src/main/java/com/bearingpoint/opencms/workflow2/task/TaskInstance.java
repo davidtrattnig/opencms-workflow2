@@ -177,7 +177,7 @@ public class TaskInstance {
 		return resource.getResourceUUID();
 	}
 	
-	public Date getDueDate() throws TaskException {
+	public String getDueDate() throws TaskException {
 		
 		Calendar calendar = (Calendar) createDate.clone();
         int dueDateDays = 0;
@@ -191,6 +191,9 @@ public class TaskInstance {
         }
         
         calendar.add(GregorianCalendar.DAY_OF_MONTH, dueDateDays);
-        return calendar.getTime(); 
+        
+		//TODO insert date presentation rules (same for create date)
+		DateFormat sdf = SimpleDateFormat.getDateInstance();
+		return sdf.format(calendar.getTime());
 	}
 }
