@@ -22,7 +22,7 @@
 				Pooled within ${task.projectName} - <a href="#">Take!</a>
 			</c:if>
 			<c:if test="${!task.pooled}">
-				Assigned to ${task.projectName} - <a href="#">Pool!</a>
+				Assigned to ${task.userName} - <a href="#">Pool!</a>
 			</c:if>
 	
 		</td>
