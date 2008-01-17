@@ -42,10 +42,29 @@
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				
 				<!-- SET THE HIBERNATE DIALECT IF YOU HAVE A SPECIAL ENVIRONMENT OR
-					 IF YOU ARE FACING PROBLEMS WHEN ACCESSING THE DATABASE: -->
+					 IF YOU ARE FACING PROBLEMS WHEN ACCESSING THE DATABASE: 
+
+						* Oracle (any version) - org.hibernate.dialect.OracleDialect
+						* Oracle 9 - org.hibernate.dialect.Oracle9Dialect					 
+					 	* DB2 - org.hibernate.dialect.DB2DialectmixDialect
+						* Mckoi SQL - org.hibernate.dialect.MckoiDialect
+						* Microsoft SQL Server - org.hibernate.dialect.SQLServerDialect
+						* MySQL - org.hibernate.dialect.MySQLDialect
+						* PostgreSQL - org.hibernate.dialect.PostgreSQLDialect						
+						* Sybase - org.hibernate.dialect.SybaseDialect
+						* Sybase Anywhere - org.hibernate.dialect.SybaseAnywhereDialect
+						* Progress - org.hibernate.dialect.ProgressDialect
+						* FrontBase - org.hibernate.dialect.FrontbaseDialect
+						* Ingres - org.hibernate.dialect.IngresDialect
+						* HypersonicSQL - org.hibernate.dialect.HSQLDialect
+						* SAP DB - org.hibernate.dialect.SAPDBDialect
+						* Informix - org.hibernate.dialect.Infor						
+						* Interbase - org.hibernate.dialect.InterbaseDialect
+						* Pointbase - org.hibernate.dialect.PointbaseDialect
+
+					 -->
 				 
 				<!-- <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop> -->
-				<!-- <prop key="hibernate.dialect">org.hibernate.dialect.MySQLMyISAMDialect</prop> -->
 				
 				<!-- FOR CERTAIN DATABASE YOU HAVE TO SET A SUBSITUTION FOR TRUE/FALSE VALUES: -->
 				<!-- <prop key="hibernate.query.substitutions">true 1, false 0</prop> -->
