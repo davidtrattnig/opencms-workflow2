@@ -15,7 +15,8 @@ Workflow2 0.4.1 ALPHA2 - xxx 2008
 * Fixed assignment handling
 * Changed task class for previous user handling
 ! Improved task view GUI
-! Added default usage of OpenCms Database
+! Added default usage of OpenCms Database !IMPORTANT: Review the database
+  configuration before restarting if you don't like this behavior
 
 Workflow2 0.4.0 ALPHA2 - December 21, 2007
 * Added module initialization class to manifest
