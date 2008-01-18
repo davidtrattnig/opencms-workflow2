@@ -18,7 +18,7 @@
             <property name="url"><value>jdbc:mysql://localhost:3306/workflow2?useServerPrepStmts=false&amp;jdbcCompliantTruncation=false</value></property>
             <property name="username"><value>root</value></property>
             <property name="password"><value>root</value></property>
-        -->
+        -->        
     </bean>
     
     <!-- LEGACY CONFIGURATION (if you use this don't forget to remove the datasource above) -->
