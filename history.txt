@@ -9,7 +9,7 @@ Legend:
 * Bug fixed
 - General comment
 
-Workflow2 0.4.1 ALPHA2 - xxx 2008
+Workflow2 0.4.1 ALPHA2 - January 11, 2008
 * Date Format fixed
 * Fixed several task view issues
 * Fixed assignment handling
