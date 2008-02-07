@@ -111,7 +111,7 @@ public class TaskInstance {
 	public String getUserName() {
 		
 		try {
-			CmsUser user = CmsUtil.getCmsObject()
+			CmsUser user = CmsUtil.getAdminCmsObject()
 							.readUser(taskData.getUserUUID());
 			return user.getFullName();
 		}
@@ -133,7 +133,7 @@ public class TaskInstance {
 		
 		if (!getPooled()) {
 			try {
-				return CmsUtil.getCmsObject()
+				return CmsUtil.getAdminCmsObject()
 								.readUser(taskData.getAssignedUserUUID()).toString();
 			}
 			catch (Exception e) {
@@ -154,7 +154,7 @@ public class TaskInstance {
 	public String getProjectName() {
 		
 		try {
-			return CmsUtil.getCmsObject()
+			return CmsUtil.getAdminCmsObject()
 							.readProject(taskData.getProjectUUID()).getName();
 		}
 		catch (CmsException e) {

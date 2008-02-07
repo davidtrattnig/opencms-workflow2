@@ -11,13 +11,13 @@ import org.opencms.file.CmsObject;
  */
 public class CmsUtil {
 
-	private static CmsObject cms;
+	private static CmsObject adminCms;
 	
-	public static void setCmsObject(CmsObject cms) {
-		CmsUtil.cms = cms;
+	public static void setAdminCmsObject(CmsObject adminCms) {
+		CmsUtil.adminCms = adminCms;
 	}
 	
-	public static CmsObject getCmsObject() {
-		return cms;
+	public static CmsObject getAdminCmsObject() {
+		return adminCms;
 	}
 }
