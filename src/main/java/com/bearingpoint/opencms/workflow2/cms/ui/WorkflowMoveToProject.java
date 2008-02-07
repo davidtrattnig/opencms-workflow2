@@ -31,6 +31,7 @@
 
 package com.bearingpoint.opencms.workflow2.cms.ui;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,6 +40,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
+import org.opencms.file.CmsObject;
 import org.opencms.file.CmsProject;
 import org.opencms.file.CmsResource;
 import org.opencms.file.CmsResourceFilter;
@@ -55,6 +57,7 @@ import com.bearingpoint.opencms.workflow2.I_WorkflowController;
 import com.bearingpoint.opencms.workflow2.WorkflowController;
 import com.bearingpoint.opencms.workflow2.WorkflowException;
 import com.bearingpoint.opencms.workflow2.WorkflowPublishNotPermittedException;
+import com.bearingpoint.opencms.workflow2.cms.CmsUtil;
 import com.bearingpoint.opencms.workflow2.stage.ProjectWrapper;
 
 /**
@@ -157,33 +160,42 @@ public class WorkflowMoveToProject extends CmsTouch {
         // save initialized instance of this class in request attribute for included sub-elements
         getJsp().getRequest().setAttribute(SESSION_WORKPLACE_CLASS, this);
         try {
+        	//TODO check this for coming move-folder-integration..
+        	boolean recursive = false;
         	
-        	CmsProject targetProject = getCms().readProject(new CmsUUID(getParamProject()));
+        	CmsResource resource = getCms().readResource(getParamResource());
+        	CmsObject adminCms = CmsUtil.getAdminCmsObject();        	
+        	
+        	CmsProject targetProject = adminCms.readProject(new CmsUUID(getParamProject()));
         	LOG.info("WF2| target project uuid: "+targetProject.getUuid().toString());
         	        	
-        	//backup current project uuid        	
-        	CmsProject currentProject = getCms().getRequestContext().currentProject();
+        	//backup current project for admin cms (to switch back after the process)      	
+        	CmsProject currentProject = adminCms.getRequestContext().currentProject();
         	LOG.info("WF2| current project: "+currentProject.getName());
         	
+        	//move to current user project:
+        	CmsProject currentUserProject = getCms().getRequestContext().currentProject();
+        	adminCms.getRequestContext().setCurrentProject(currentUserProject);        	
+        	
         	//touch resource before moving to ensure
-        	//correct project assignment:
-        	actionTouch();
+        	//correct project assignment:    
+        	adminCms.lockResource(resource.getRootPath());
+        	adminCms.setDateLastModified(resource.getRootPath(), (new Date()).getTime(), recursive);
+        	adminCms.unlockResource(resource.getRootPath());
         	
         	// switch to target project
-        	getCms().getRequestContext().setCurrentProject(targetProject);
+        	adminCms.getRequestContext().setCurrentProject(targetProject);
         	LOG.info("WF2| set current project to target project: "+targetProject.getName());
         	                    	
-            // copy the resource to the current project        
-            getCms().copyResourceToProject(getParamResource());
-            setParamNewtimestamp(getCurrentDateTime());
-            actionTouch();
-            LOG.info("WF2| copied resource '"+getParamResource()+"' to current project: "+targetProject.getName());
-        
-            //unlock resource within the target project
-        	unlockResource(getParamResource());
+            // copy the resource to the current project                	
+        	adminCms.copyResourceToProject(resource.getRootPath());
+        	adminCms.lockResource(resource.getRootPath());
+        	adminCms.setDateLastModified(resource.getRootPath(), (new Date()).getTime(), recursive);                	
+            adminCms.unlockResource(resource.getRootPath());
+            LOG.info("WF2| copied resource '"+getParamResource()+"' to current project: "+targetProject.getName());        
             
             // switch back to previous project            
-            getCms().getRequestContext().setCurrentProject(currentProject);
+        	adminCms.getRequestContext().setCurrentProject(currentProject);
             LOG.info("WF2| reset current project to: "+currentProject.getName());
             
             // close the dialog

@@ -9,6 +9,10 @@ Legend:
 * Bug fixed
 - General comment
 
+Workflow2 0.4.2 ALPHA2 - February xx, 2008
+* Fixed permissions issue when moving resources between projects (AdminCmsObject)
+- Renamed utility method for AdminCmsObject retrieval
+
 Workflow2 0.4.1 ALPHA2 - January 11, 2008
 * Date Format fixed
 * Fixed several task view issues
