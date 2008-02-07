@@ -11,6 +11,7 @@ Legend:
 
 Workflow2 0.4.2 ALPHA2 - February xx, 2008
 * Fixed permissions issue when moving resources between projects (AdminCmsObject)
+* Fixed issue when retrieving valid reject projects and the resource hasn't been modified yet.
 - Renamed utility method for AdminCmsObject retrieval
 
 Workflow2 0.4.1 ALPHA2 - January 11, 2008
