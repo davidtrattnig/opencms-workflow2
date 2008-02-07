@@ -19,6 +19,7 @@ import org.opencms.util.CmsUUID;
 import com.bearingpoint.opencms.commons.springmanager.SpringManager;
 import com.bearingpoint.opencms.workflow2.WorkflowException;
 import com.bearingpoint.opencms.workflow2.cms.CmsMirPrBelongsToOtherInvisible;
+import com.bearingpoint.opencms.workflow2.cms.CmsUtil;
 import com.bearingpoint.opencms.workflow2.stage.dao.I_WorkflowProjectListDAO;
 import com.bearingpoint.opencms.workflow2.stage.domain.WorkflowProject;
 
@@ -89,8 +90,9 @@ public class ProjectManager implements I_ProjectManager {
 			return new ArrayList();
 		}
 		
-		try {
-			allProjects = _cms.getAllManageableProjects();
+		try { 
+			allProjects = CmsUtil.getAdminCmsObject().getAllManageableProjects();
+			
 		} catch (CmsException e) {
 			throw new WorkflowException("error while reading all CMS projects", e);
 		}
