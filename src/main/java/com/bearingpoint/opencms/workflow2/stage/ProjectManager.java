@@ -126,7 +126,7 @@ public class ProjectManager implements I_ProjectManager {
 		List<ProjectWrapper> validProjects = new ArrayList<ProjectWrapper>();
 		
 		//check if resource hasn't been modified yet:
-		if (!CmsMirPrBelongsToOtherInvisible.DEFAULT_PR_ID.equals(projectID)) {
+		if (!CmsMirPrBelongsToOtherInvisible.DEFAULT_PR_ID.equals(projectID.toString())) {
 			List<ProjectWrapper> allProjects = getAllWorkflowProjects();
 						
 			for (ProjectWrapper project : allProjects) {
