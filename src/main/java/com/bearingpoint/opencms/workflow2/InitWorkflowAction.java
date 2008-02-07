@@ -48,7 +48,7 @@ public class InitWorkflowAction extends A_CmsModuleAction {
     	
     	LOG.debug("*$* start workflow initialization..");    			
         
-    	CmsUtil.setCmsObject(adminCms);
+    	CmsUtil.setAdminCmsObject(adminCms);
         //initEventListener();
         WorkflowDataSource.initDatasourceData(configurationManager);
        
