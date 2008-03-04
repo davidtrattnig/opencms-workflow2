@@ -9,6 +9,10 @@ Legend:
 * Bug fixed
 - General comment
 
+Workflow2 0.4.3 ALPHA2 - March xx, 2008
+! Added an example workflow configuration file (opencms-workplace.xml) for OpenCms 7.0.4
+- Updated SpringManager dependency to 0.9.5
+
 Workflow2 0.4.2 ALPHA2 - February 08, 2008
 * Fixed permissions issue when moving resources between projects (AdminCmsObject)
 * Fixed issue when retrieving valid reject projects and the resource hasn't been modified yet.
