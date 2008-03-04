@@ -36,7 +36,7 @@ public class WorkflowDataSource extends org.springframework.jdbc.datasource.Driv
 		}
 		else {
 			/* the workflow module hasn't been initialized yet, but now worries, the springmanager will retry. */
-			LOG.info("WORKFLOW2 DATABASE: hibernate init in the first round hasn't been successfull. hope there is another one...");
+			LOG.info("WORKFLOW2 DATABASE: hibernate init hasn't been successfull in the first round. hope there is another one...");
 		}
 	}
 	
