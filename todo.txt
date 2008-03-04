@@ -45,3 +45,5 @@ Possible Improvements:
 * Dynamically create context menu rules
 
 * Use OpenCms DB by default
+
+* Add error message for Approve/Reject dialog when no project flow is setup

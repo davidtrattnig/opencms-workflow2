@@ -76,11 +76,18 @@ public class WorkflowControllerImpl {
 			engineNotAttached = true;
 		}
 
+		//init service objects:
 		_cms = cms;
 		_relationManager = new RelationManager(_engine);				
 		_taskManager = new TaskManager(_cms, _engine, _relationManager);
 		_projectManager = new ProjectManager(cms);
-			
+		
+		//perform some security checks:
+		if (_cms==null) { LOG.fatal("_cms object is null"); }
+		if (_relationManager==null) { LOG.fatal("_relationManager object is null"); }
+		if (_taskManager==null) { LOG.fatal("_taskManager object is null"); }
+		if (_projectManager==null) { LOG.fatal("_projectManager object is null"); }
+		
 		//register eventlistener to verify the integrity of the 
 		//resource-workflow relations:
 		I_CmsEventListener listener = new RelationIntegrityListener(_relationManager);

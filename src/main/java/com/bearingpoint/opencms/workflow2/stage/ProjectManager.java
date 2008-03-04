@@ -155,21 +155,6 @@ public class ProjectManager implements I_ProjectManager {
 		List<ProjectWrapper> validProjects = new ArrayList<ProjectWrapper>();
 		List<ProjectWrapper> allProjects = getAllWorkflowProjects();
 		
-		//read all groups assigned to the user (directly&indirectly)
-//		try { 
-//			groups = _cms.getGroupsOfUser(currentUser.getName(), false, true);
-//		} catch (CmsException e) {
-//			throw new WorkflowException("Error while reading groups of currentUser <"+currentUser.getName()+">", e);
-//		}
-		
-		//find all projects which have the users groups assigned
-//		for (CmsProject project : allProjects) {
-//			for (CmsGroup userGroup : groups) {				
-//				if (project.getGroupId().toString().equals(userGroup.getId().toString())) {
-//					userProjects.add(project);
-//				}
-//			}
-//		} 
 		try {
 			userProjects = _cms.getAllAccessibleProjects();
 		} catch (CmsException e) {
