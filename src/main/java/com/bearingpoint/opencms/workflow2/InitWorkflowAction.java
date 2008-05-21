@@ -21,10 +21,13 @@ import org.apache.commons.logging.Log;
 import org.opencms.configuration.CmsConfigurationManager;
 import org.opencms.file.CmsObject;
 import org.opencms.main.CmsLog;
+import org.opencms.main.I_CmsEventListener;
+import org.opencms.main.OpenCms;
 import org.opencms.module.A_CmsModuleAction;
 import org.opencms.module.CmsModule;
 
 import com.bearingpoint.opencms.workflow2.cms.CmsUtil;
+import com.bearingpoint.opencms.workflow2.events.CmsWorkflowEventManager;
 
 /**
  * InitWorkflowAction
@@ -46,27 +49,22 @@ public class InitWorkflowAction extends A_CmsModuleAction {
 	public void initialize(CmsObject adminCms, CmsConfigurationManager configurationManager, CmsModule module) {
     	super.initialize(adminCms,configurationManager,module); 
     	
-    	LOG.debug("*$* start workflow initialization..");    			
-        
+    	LOG.debug("WF2| start workflow initialization..");    			        
     	CmsUtil.setAdminCmsObject(adminCms);
-        //initEventListener();
-        WorkflowDataSource.initDatasourceData(configurationManager);
-       
-       
-        LOG.debug("*$* workflow initialization finished!");
+        initEventListener();
+        WorkflowDataSource.initDatasourceData(configurationManager);              
+        LOG.debug("WF2| workflow initialization finished!");
     }
-
     
     /**
      * Assigns the Event Listener for the Workflow Module
      * to perform workflow changes after e.g. publish events.
      */
-//    public void initEventListener() {
-//    	
-//    	//TODO attach proper event listener
-//    	WorkflowEventListener eventListener = new WorkflowEventListener();
-//    	OpenCms.addCmsEventListener(eventListener);  
-//    }
+    public void initEventListener() {
+    	
+    	I_CmsEventListener eventListener = new CmsWorkflowEventManager();
+    	OpenCms.addCmsEventListener(eventListener);  
+    }
     
 
         

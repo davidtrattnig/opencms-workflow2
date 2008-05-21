@@ -8,7 +8,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OPENCMS-LIBS"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/opencms-core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/opencmsmodule-com.bearingpoint.opencms.commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/opencmsmodule-com.bearingpoint.opencms.commons.springmanager"/>
 	<classpathentry kind="lib" path="/opencmsmodule-com.bearingpoint.opencms.commons.springmanager/src/main/opencms/system/modules/com.bearingpoint.opencms.commons.springmanager/lib/antlr-2.7.5H3.jar"/>
 	<classpathentry kind="lib" path="/opencmsmodule-com.bearingpoint.opencms.commons.springmanager/src/main/opencms/system/modules/com.bearingpoint.opencms.commons.springmanager/lib/asm.jar"/>
 	<classpathentry kind="lib" path="/opencmsmodule-com.bearingpoint.opencms.commons.springmanager/src/main/opencms/system/modules/com.bearingpoint.opencms.commons.springmanager/lib/asm-attrs.jar"/>
@@ -17,10 +16,11 @@
 	<classpathentry kind="lib" path="/opencmsmodule-com.bearingpoint.opencms.commons.springmanager/src/main/opencms/system/modules/com.bearingpoint.opencms.commons.springmanager/lib/hibernate-annotations.jar"/>
 	<classpathentry kind="lib" path="/opencmsmodule-com.bearingpoint.opencms.commons.springmanager/src/main/opencms/system/modules/com.bearingpoint.opencms.commons.springmanager/lib/hibernate-entitymanager.jar"/>
 	<classpathentry kind="lib" path="/opencmsmodule-com.bearingpoint.opencms.commons.springmanager/src/main/opencms/system/modules/com.bearingpoint.opencms.commons.springmanager/lib/jta.jar"/>
-	<classpathentry kind="lib" path="/opencmsmodule-com.bearingpoint.opencms.commons.springmanager/src/main/opencms/system/modules/com.bearingpoint.opencms.commons.springmanager/lib/spring-1.2.6.jar" sourcepath="D:/Documents and Settings/david.trattnig/Desktop/spring-framework-1.2.6.zip"/>
-	<classpathentry kind="lib" path="/opencmsmodule-com.bearingpoint.opencms.commons.springmanager/src/main/opencms/system/modules/com.bearingpoint.opencms.commons.springmanager/lib/spring-mock.jar"/>
 	<classpathentry kind="lib" path="/opencms-commons/lib/ant.jar"/>
 	<classpathentry kind="lib" path="/opencms-commons/lib/catalina-ant.jar"/>
 	<classpathentry kind="lib" path="/opencms-commons/lib/ojdbc14.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/opencmsmodule-com.bearingpoint.opencms.commons.springmanager"/>
+	<classpathentry kind="lib" path="/opencmsmodule-com.bearingpoint.opencms.commons.springmanager/src/main/opencms/system/modules/com.bearingpoint.opencms.commons.springmanager/lib/spring.jar"/>
+	<classpathentry kind="lib" path="/opencmsmodule-com.bearingpoint.opencms.commons.springmanager/src/main/opencms/system/modules/com.bearingpoint.opencms.commons.springmanager/lib/spring-test.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

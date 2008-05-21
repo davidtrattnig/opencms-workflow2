@@ -14,6 +14,7 @@ import org.opencms.file.CmsUser;
 import org.opencms.main.CmsException;
 import org.opencms.main.CmsLog;
 import org.opencms.main.OpenCms;
+import org.opencms.security.CmsRole;
 import org.opencms.util.CmsUUID;
 
 import com.bearingpoint.opencms.workflow2.I_WorkflowController;
@@ -68,8 +69,23 @@ public class TaskViewResultBean {
 		this.relManager = wc.getRelationManager();
 		this.cms = cms;
 		this.user = cms.getRequestContext().currentUser();
+		initTasks();
+	}
+	
+	/**
+	 * Inits the tasks results for task view.
+	 * <p>
+	 * @throws CmsException
+	 * @throws TaskException
+	 */
+	private void initTasks() throws CmsException, TaskException {
+		
 		this.areaCount = 0;
 		this.taskCount = 0;
+		userTasks = new ArrayList<TaskInstance>();
+		pooledTasks = new ArrayList<TaskInstance>();
+		managerTasks = new ArrayList<TaskInstance>();
+		otherTasks = new ArrayList<TaskInstance>();
 		
 		if (fillUserTasks()) {
 			areaCount++;
@@ -83,6 +99,7 @@ public class TaskViewResultBean {
 			areaCount++;
 			taskCount += managerTasks.size();
 		}
+		
 		if (fillOtherTasks()) {
 			areaCount++;
 			taskCount += otherTasks.size();
@@ -92,6 +109,17 @@ public class TaskViewResultBean {
 		attachResources(pooledTasks);
 		attachResources(managerTasks);
 		attachResources(otherTasks);
+	}
+	
+	/**
+	 * Refreshes the task results for task view
+	 * if e.g. a task state has been changed.
+	 * <p>
+	 * @throws CmsException
+	 * @throws TaskException
+	 */
+	public void refresh() throws CmsException, TaskException {
+		initTasks();
 	}
 	
 	//TODO where to place???
@@ -141,17 +169,40 @@ public class TaskViewResultBean {
 	
 	private boolean fillPooledTasks() throws CmsException {
 		
-		List<CmsGroup> groupsOfUser=null;
-		pooledTasks = new ArrayList<TaskInstance>();
+//		List<CmsGroup> groupsOfUser=null;
+//		pooledTasks = new ArrayList<TaskInstance>();
+//		
+//		//read tasks of projects the user belongs to:
+//		try {
+//			groupsOfUser = cms.getGroupsOfUser(user.getName(), false);
+//	    	for (CmsGroup group : groupsOfUser) {
+//	    		pooledTasks.addAll(taskManager.getTasks(group));
+//	    	}
+//		} catch (TaskException e) {
+//			LOG.error("error while reading tasks for user "+user.getName());
+//		}
+//		return (pooledTasks.size()>0) ? true : false;
 		
-		//read group tasks:
-		try {
-			groupsOfUser = cms.getGroupsOfUser(user.getName(), false);
-	    	for (CmsGroup group : groupsOfUser) {
-	    		pooledTasks.addAll(taskManager.getTasks(group));
-	    	}
-		} catch (TaskException e) {
-			LOG.error("error while reading tasks for user "+user.getName());
+		//read all tasks from projects where the current user has user rights:
+		List<CmsProject> allProjects = cms.getAllAccessibleProjects();
+		List<CmsGroup> userGroups = cms.getGroupsOfUser(user.getName(), false);
+		pooledTasks = new ArrayList();
+		
+		for (CmsProject project : allProjects) {			
+			for (CmsGroup group : userGroups) {
+				
+				//found group where the current user is in the user group:
+				if (project.getGroupId().toString().equals(group.getId().toString())) {
+					
+					//..so now read all tasks for this project:
+					try {
+						//pooledTasks.addAll(taskManager.getTasks(project));
+						pooledTasks.addAll(taskManager.getTasks(project));
+					} catch (TaskException e) {
+						LOG.error("WF2 | Error while reading pooled tasks for project "+project.getName(), e);
+					}									
+				}
+			}
 		}
 		return (pooledTasks.size()>0) ? true : false;
 	}
@@ -184,32 +235,46 @@ public class TaskViewResultBean {
 		return (managerTasks.size()>0) ? true : false;
 	}
 	
+	/**
+	 * Retrieves all tasks which have not been retrieved by
+	 * the previous methods which are:
+	 * 
+	 * 		* User Tasks
+	 * 		* Pooled Tasks
+	 * 		* Manager Tasks
+	 * 
+	 * These task are visible for Administrators only.
+	 * <p>
+	 * @return true if tasks found.
+	 */
 	private boolean fillOtherTasks() {
 		
-		//read all other tasks (and remove existing ones in other areas) -
-		//these tasks are just for the admin view:
-		otherTasks = taskManager.getTasks();
-		List<TaskInstance> existingTasks = new ArrayList<TaskInstance>();
-		
-		for (TaskInstance task : otherTasks) {
-			for (TaskInstance userTask : userTasks) {
-				if (task.getId().equals(userTask.getId())) {
-					existingTasks.add(task);
+		if (getIsAdmin()) {
+			otherTasks = taskManager.getTasks();
+			List<TaskInstance> existingTasks = new ArrayList<TaskInstance>();
+			
+			for (TaskInstance task : otherTasks) {
+				for (TaskInstance userTask : userTasks) {
+					if (task.getId().equals(userTask.getId())) {
+						existingTasks.add(task);
+					}
 				}
+				for (TaskInstance pooledTask : pooledTasks) {
+					if (task.getId().equals(pooledTask.getId())) {
+						existingTasks.add(task);
+					}
+				}
+				for (TaskInstance managerTask : managerTasks) {
+					if (task.getId().equals(managerTask.getId())) {
+						existingTasks.add(task);
+					}
+				}			
 			}
-			for (TaskInstance pooledTask : pooledTasks) {
-				if (task.getId().equals(pooledTask.getId())) {
-					existingTasks.add(task);
-				}
-			}
-			for (TaskInstance managerTask : managerTasks) {
-				if (task.getId().equals(managerTask.getId())) {
-					existingTasks.add(task);
-				}
-			}			
+			otherTasks.removeAll(existingTasks);
+			return (otherTasks.size()>0) ? true : false;
 		}
-		otherTasks.removeAll(existingTasks);
-		return (otherTasks.size()>0) ? true : false;
+				
+		return false;
 	}
 	
 	private CmsGroup getGroupById(CmsUUID uuid) throws CmsException {
@@ -242,4 +307,15 @@ public class TaskViewResultBean {
     	headline = headline.replace("%2", areaCount.toString());
     	return headline;    	
     }
+    
+    public boolean getIsAdmin() {
+    	    
+    	return OpenCms.getRoleManager().hasRole(cms, CmsRole.ADMINISTRATOR);
+    }
+    
+    public boolean getIsManager() {
+    	//TODO: add implementation to check if the current user is manager of any project
+    	return false;
+    }
+
 }

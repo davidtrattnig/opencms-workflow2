@@ -31,20 +31,22 @@ public interface I_TaskManager {
 	 */
 	public List<TaskInstance> getTasks(CmsUser user) throws TaskException;
 	
-	/**
-	 * Retrieves all tasks for a group which are NOT assigned to
-	 * an specific user. Inside the workflow engine it may be 
-	 * handled as "tasks for role" or similiar.
-	 * <p>
-	 * @param group
-	 * @return list of tasks
-	 */
-	public List<TaskInstance> getTasks(CmsGroup group) throws TaskException;
+//	/**
+//	 * Retrieves all tasks for a group which are NOT assigned to
+//	 * an specific user. Inside the workflow engine it may be 
+//	 * handled as "tasks for role" or similiar.
+//	 * <p>
+//	 * @param group
+//	 * @return list of tasks
+//	 */
+//	public List<TaskInstance> getTasks(CmsGroup group) throws TaskException;
 	
 	/**
 	 * Retrieves all tasks which belong to a specific project (pooled)
 	 * or to any user of this project. Just returns tasks which are
 	 * open (not closed or rejected).
+	 * Within the workflow engine this may be represented as "tasks for role",
+	 * "tasks for group" or similar.
 	 * <p>
 	 * @param project
 	 * @return list of task instances

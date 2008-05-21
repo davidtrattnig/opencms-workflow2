@@ -140,24 +140,31 @@ body {
 				<th class="column">Title</th>
 				<th class="column">Resource</th>
 				<th class="column">Assignment</th>
-				<th class="column">-delete(admin)-</th>
+				<c:if test="${result.isAdmin}"><th class="column">&nbsp;</th></c:if>
 			</tr>
 				
 			<c:set var="section" value="Your Tasks" scope="request" />
 			<c:set var="tasks" value="${result.userTasks}" scope="request" />
+			<c:set var="isAdmin" value="${result.isAdmin}" scope="request" />
 			<cms:include page="tasksection.inc.jsp" />	
 			
 			<c:set var="section" value="Tasks in your projects" scope="request" />
 			<c:set var="tasks" value="${result.pooledTasks}" scope="request" />
+			<c:set var="isAdmin" value="${result.isAdmin}" scope="request" />
 			<cms:include page="tasksection.inc.jsp" />	
 
-			<c:set var="section" value="Manager Tasks" scope="request" />
-			<c:set var="tasks" value="${result.managerTasks}" scope="request" />
-			<cms:include page="tasksection.inc.jsp" />	
+			<c:if test="${result.isManager}">
+				<c:set var="section" value="Manager Tasks" scope="request" />
+				<c:set var="tasks" value="${result.managerTasks}" scope="request" />
+				<c:set var="isAdmin" value="${result.isAdmin}" scope="request" />
+				<cms:include page="tasksection.inc.jsp" />	
+			</c:if>
 			
-			<c:set var="section" value="Other Tasks" scope="request" />
-			<c:set var="tasks" value="${result.otherTasks}" scope="request" />
-			<cms:include page="tasksection.inc.jsp" />				
+			<c:if test="${result.isAdmin}">
+				<c:set var="section" value="Other Tasks" scope="request" />
+				<c:set var="tasks" value="${result.otherTasks}" scope="request" />
+				<cms:include page="tasksection.inc.jsp" />				
+			</c:if>
 		</table>	
 		<p id="info">${result.headline}</p>		
 	</c:if>	

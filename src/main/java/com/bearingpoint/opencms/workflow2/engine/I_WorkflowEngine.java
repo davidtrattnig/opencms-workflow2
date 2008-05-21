@@ -85,25 +85,38 @@ public interface I_WorkflowEngine {
 	 */
 	public List<TaskInstance> getWorkflowTasks(String processID);
 	
+//	/**
+//	 * Retrieves all tasks for a group which are NOT assigned to
+//	 * an specific user. Inside the workflow engine it may be 
+//	 * handled as "tasks for role" or similiar.
+//	 * <p>
+//	 * @param group
+//	 * @return list of tasks
+//	 */
+//	public List<TaskInstance> getGroupTasks(CmsUUID group);
+	
 	/**
-	 * Retrieves all tasks for a group which are NOT assigned to
+	 * Retrieves all tasks for a project which are NOT assigned to
 	 * an specific user. Inside the workflow engine it may be 
 	 * handled as "tasks for role" or similiar.
 	 * <p>
 	 * @param group
 	 * @return list of tasks
 	 */
-	public List<TaskInstance> getGroupTasks(CmsUUID group);
+	public List<TaskInstance> getProjectTasks(CmsUUID project);
 	
 	/**
 	 * Assigns a task to the given user.
+	 * If parameter <code>user</code> is null
+	 * the task will be pooled (assignment will
+	 * be removed).
 	 * <p>
 	 * 
 	 * @param id task id
 	 * @param user user to assign the task to
 	 */
 	public void assignTask(String id, CmsUUID user);
-	
+		
 	/**
 	 * Retrieves one specific task identified by id.
 	 * <p>
