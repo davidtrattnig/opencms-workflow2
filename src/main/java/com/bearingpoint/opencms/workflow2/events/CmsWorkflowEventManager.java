@@ -46,7 +46,7 @@ public class CmsWorkflowEventManager implements I_CmsEventListener {
             	
             	if (wc==null) {
 	            	try {
-						WorkflowController wc = new WorkflowController(CmsUtil.getAdminCmsObject());
+						wc = new WorkflowController(CmsUtil.getAdminCmsObject());
 					} catch (WorkflowException e) {
 						LOG.fatal ("WF2| error while workflow controller instantiation!", e);
 					}
