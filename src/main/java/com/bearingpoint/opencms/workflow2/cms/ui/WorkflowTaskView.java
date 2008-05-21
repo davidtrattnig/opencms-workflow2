@@ -17,37 +17,30 @@
 *****************************************************************************/
 package com.bearingpoint.opencms.workflow2.cms.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
-import org.opencms.file.CmsGroup;
 import org.opencms.file.CmsObject;
 import org.opencms.file.CmsUser;
 import org.opencms.jsp.CmsJspActionElement;
-import org.opencms.main.CmsException;
 import org.opencms.main.CmsLog;
-import org.opencms.main.OpenCms;
-import org.opencms.security.CmsRole;
 import org.opencms.workplace.CmsDialog;
 import org.opencms.workplace.CmsWorkplaceSettings;
 
 import com.bearingpoint.opencms.workflow2.WorkflowController;
 import com.bearingpoint.opencms.workflow2.WorkflowException;
+import com.bearingpoint.opencms.workflow2.engine.NoEngineAttachedException;
 import com.bearingpoint.opencms.workflow2.task.I_TaskManager;
 import com.bearingpoint.opencms.workflow2.task.TaskException;
-import com.bearingpoint.opencms.workflow2.task.TaskInstance;
 
 
 /**
  * TaskView
  * <p>
  * Dialog displaying task for the current user.
- * 
+ * <p>
  * @author David.Trattnig
  */
 public class WorkflowTaskView extends CmsDialog {
@@ -155,10 +148,14 @@ public class WorkflowTaskView extends CmsDialog {
     	
     	try {
     		wc = new WorkflowController(getCms());    	
+    		taskManager = wc.getTaskManager();
     	}
     	catch (WorkflowException e) {
     		LOG.fatal("Couldn't instantiate WorkflowController!", e);
-    	}                 
+    	}   
+		catch (NoEngineAttachedException ee) {
+			LOG.error("Couldn't retrieve taskManager (no engine attached)", ee);
+		}
     	    	
     	try {
 			result = new TaskViewResultBean(cms, wc);
@@ -190,24 +187,39 @@ public class WorkflowTaskView extends CmsDialog {
 	 * @return true if the process succeeded, else false
 	 */
 	public boolean actionAccept() {
+	
+		Long taskId = getTaskId();
+		if (taskId==null) { return false; }		
+		
+		try {			
+			taskManager.assignTask(taskId.toString(), currentUser);
+			result.refresh();
+		} catch (Exception e) {
+			LOG.error("Error while assigning task "+taskId+" to user "+currentUser.getName());
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * Retrieves the task id passed via parameters.
+	 * Returns null if an invalid id has been passed.
+	 * <p>
+	 * @return taskId
+	 */
+	private Long getTaskId() {
+		
 		String sTaskId=getParamTask();
 		Long nTaskId=null;
 		
 		try {
-			nTaskId=new Long(sTaskId);
+			nTaskId=new Long(sTaskId);			
 		}
 		catch (NullPointerException e) {
-			LOG.fatal("invalid taskID: "+sTaskId+" // "+e);
-			return false;
-		}	
-		
-		try {			
-			taskManager.assignTask(nTaskId.toString(), currentUser);
-		} catch (TaskException e) {
-			LOG.error("Error while assigning task "+nTaskId+" to user "+currentUser.getName());
+			LOG.fatal("invalid taskID: "+sTaskId+" // ", e);			
 		}
 		
-		return true;
+		return nTaskId;
 	}
 	
     /**
@@ -218,11 +230,13 @@ public class WorkflowTaskView extends CmsDialog {
      */
     public boolean actionDeleteTask() {
         
-        Long taskId = new Long(getDeleteTaskId());
+    	Long taskId = getTaskId();
+		if (taskId==null) { return false; }
         
         try {
 			taskManager.closeTask(taskId.toString());
-		} catch (TaskException e) {
+			result.refresh();
+		} catch (Exception e) {
 			LOG.error("error while closing task "+taskId, e);
 			return false;
 		}
@@ -237,15 +251,18 @@ public class WorkflowTaskView extends CmsDialog {
 	 * @return true if the process succeeded, else false
 	 */
 	public boolean actionPool() {
-		String sTaskId=getParamTask();
+
+		Long taskId = getTaskId();
+		if (taskId==null) { return false; }
 						
 		try {
-			taskManager.poolTask(sTaskId);
-		} catch (TaskException e) {
-			LOG.error("error while pooling task "+sTaskId, e);
+			taskManager.poolTask(taskId.toString());
+			result.refresh();
+		} catch (Exception e) {
+			LOG.error("error while pooling task "+taskId.toString(), e);
 			return false;
 		}
-		
+				
 		return true;
 	}
 	
@@ -325,53 +342,7 @@ public class WorkflowTaskView extends CmsDialog {
             m_paramComment = comments[0];
         }
     }
-	
-    /**
-     * getTasks
-     * 
-     * Retrieves a list of tasks assigned to current user<p>
-     * 
-     * @return {@link List} of {@link CmsTask}
-     */
-	@SuppressWarnings("unchecked")
-    public List<TaskInstance> getTasks() {
-		List<TaskInstance> lTasks=null;
-		try {
-			if (OpenCms.getRoleManager().hasRole(cms, CmsRole.ADMINISTRATOR)) {
-				lTasks = taskManager.getTasks();
-			}
-			else
-			{
-				List<CmsGroup> groupsOfUser=null;				
-				try {
-                    groupsOfUser = cms.getGroupsOfUser(currentUser.getName(), false);
-				}
-				catch (CmsException e) {
-					LOG.error("Couldn't read groups of user '"+currentUser.getName()+"'", e);
-                    return null;                    
-				}
-				
-                try {
-                	lTasks = new ArrayList();
-                	for (CmsGroup group : groupsOfUser) {
-                		lTasks.addAll(taskManager.getTasks(group));
-                	}
-                }
-                catch (TaskException e) {
-                    LOG.error("Couldn't get assigned tasks for user '"+currentUser.getName()+"' and corresponding groups");
-                    return null;
-                }
-			}
-		}
-		catch (Exception e) {
-			LOG.fatal(e);
-            return null;
-		}
-		
-		LOG.info ("USER: "+getCms().getRequestContext().currentUser().getName());
-		return lTasks;
-	}
-    
+	    
     /**
      * @see org.opencms.workplace.CmsWorkplace#initWorkplaceRequestValues(org.opencms.workplace.CmsWorkplaceSettings, javax.servlet.http.HttpServletRequest)
      */
@@ -380,14 +351,7 @@ public class WorkflowTaskView extends CmsDialog {
 
         // fill the parameter values in the get/set methods
         fillParamValues(request);
-            
-        //checks if a task deletion (--> workflow termination) was requested
-        if (existingDeleteTaskId()) {
-
-            setAction(ACTION_DELETETASK);
-            return;
-        }
-                
+                            
         // set the dialog type
         setParamDialogtype(DIALOG_TYPE);
         // set the action for the JSP switch 
@@ -401,8 +365,8 @@ public class WorkflowTaskView extends CmsDialog {
         	setAction(ACTION_ACCEPT);
         } else if (DIALOG_POOL.equals(getParamAction())) {
         	setAction(ACTION_POOL);   
-        //} else if (DIALOG_DELETETASK.equals(getParamAction())) {
-        //    setAction(ACTION_DELETETASK);       
+        } else if (DIALOG_DELETETASK.equals(getParamAction())) {
+            setAction(ACTION_DELETETASK);       
         } else if (DIALOG_DETAIL_ADDCOMMENT.equals(getParamAction())) {
         	setAction(ACTION_DETAIL_ADDCOMMENT);     	
         } else if (DIALOG_DETAIL.equals(getParamAction())) {
@@ -412,31 +376,5 @@ public class WorkflowTaskView extends CmsDialog {
         }
    
     }
-    
-    /**
-     * Returns the id for the task which should
-     * be deleted 
-     * 
-     * @return the m_paramDeleteTaskId
-     */
-    public String getDeleteTaskId() {
         
-        return getJsp().getRequest().getParameter(PARAM_DELETETASK);        
-    }
-    
-    /**
-     * Checks for an delete-task id
-     * 
-     * @return true if there is a delete-task id in the request
-     */
-    public boolean existingDeleteTaskId() {
-        
-        if (getDeleteTaskId()==null || getDeleteTaskId().length()==0) {
-            return false;
-        }
-        return true;
-    }
-            
-
-    
 }

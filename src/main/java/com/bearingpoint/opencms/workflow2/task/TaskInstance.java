@@ -84,7 +84,7 @@ public class TaskInstance {
 	 */
 	public boolean getPooled() {
 		
-		if (taskData.getUserUUID() == null) {
+		if (taskData.getAssignedUserUUID() == null) {
 			return true;
 		}
 		

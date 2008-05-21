@@ -9,9 +9,18 @@ Legend:
 * Bug fixed
 - General comment
 
-Workflow2 0.4.3 ALPHA2 - March xx, 2008
+Workflow2 0.5.0 BETA1 - May 21, 2008
+* Changed task role assignment from group to project. Also updated the workflow engine
+  interface to retrieve "Project Tasks" instead of "Group Task".
+* Added correct pool/accept button calls for tasks.
+* Fixed table rowspan layout issue
+* Fixed task deletion for admin users
+* Fixed task actor assignment
 ! Added an example workflow configuration file (opencms-workplace.xml) for OpenCms 7.0.4
+! Added role check ("Admin", "Manager") inside taskview
+! Added display of resources to attached tasks
 - Improved Logging
+- Changed default task title to a more specific one
 - Updated SpringManager dependency to 0.9.5
 
 Workflow2 0.4.2 ALPHA2 - February 08, 2008

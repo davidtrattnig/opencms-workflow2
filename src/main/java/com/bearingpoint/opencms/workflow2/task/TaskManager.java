@@ -102,11 +102,11 @@ public class TaskManager implements I_TaskManager {
 	/* (non-Javadoc)
 	 * @see com.bearingpoint.opencms.workflow2.task.I_TaskManager#getTasks(org.opencms.file.CmsProject)
 	 */
-	public List<TaskInstance> getTasks(CmsProject project) throws TaskException {
-		
-		//TODO add implementation
-		throw new TaskException("not implemented!!");
-	}
+//	public List<TaskInstance> getTasks(CmsProject project) throws TaskException {
+//		
+//		//TODO add implementation
+//		throw new TaskException("not implemented!!");
+//	}
 
 	/* (non-Javadoc)
 	 * @see com.bearingpoint.opencms.workflow2.task.I_TaskManager#getTasks(org.opencms.file.CmsUser)
@@ -121,18 +121,30 @@ public class TaskManager implements I_TaskManager {
 		return tasks;
 	}
 
+//	/* (non-Javadoc)
+//	 * @see com.bearingpoint.opencms.workflow2.task.I_TaskManager#getTasks(org.opencms.file.CmsGroup)
+//	 */
+//	public List<TaskInstance> getTasks(CmsGroup group) throws TaskException {
+//
+//		if (group == null) {
+//			throw new TaskException("group is null");
+//		}
+//		
+//		return engine.getGroupTasks(group.getId());
+//	}
+
 	/* (non-Javadoc)
 	 * @see com.bearingpoint.opencms.workflow2.task.I_TaskManager#getTasks(org.opencms.file.CmsGroup)
 	 */
-	public List<TaskInstance> getTasks(CmsGroup group) throws TaskException {
+	public List<TaskInstance> getTasks(CmsProject project) throws TaskException {
 
-		if (group == null) {
+		if (project == null) {
 			throw new TaskException("group is null");
 		}
 		
-		return engine.getGroupTasks(group.getId());
+		return engine.getProjectTasks(project.getUuid());
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.bearingpoint.opencms.workflow2.task.I_TaskManager#getTasks(com.bearingpoint.opencms.workflow2.relation.ResourceIdentifier)
 	 */

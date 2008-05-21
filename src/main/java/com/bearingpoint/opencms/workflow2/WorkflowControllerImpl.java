@@ -10,11 +10,12 @@ import org.opencms.db.CmsPublishList;
 import org.opencms.file.CmsObject;
 import org.opencms.file.CmsProject;
 import org.opencms.file.CmsResource;
-import org.opencms.main.CmsEvent;
 import org.opencms.main.CmsLog;
 import org.opencms.main.I_CmsEventListener;
 import org.opencms.main.OpenCms;
+import org.opencms.util.CmsUUID;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bearingpoint.opencms.commons.springmanager.SpringManager;
 import com.bearingpoint.opencms.workflow2.engine.I_WorkflowEngine;
@@ -26,6 +27,7 @@ import com.bearingpoint.opencms.workflow2.relation.RelationManager;
 import com.bearingpoint.opencms.workflow2.relation.ResourceIdentifier;
 import com.bearingpoint.opencms.workflow2.stage.I_ProjectManager;
 import com.bearingpoint.opencms.workflow2.stage.ProjectManager;
+import com.bearingpoint.opencms.workflow2.stage.ProjectWrapper;
 import com.bearingpoint.opencms.workflow2.task.I_Task;
 import com.bearingpoint.opencms.workflow2.task.I_TaskManager;
 import com.bearingpoint.opencms.workflow2.task.Task;
@@ -134,7 +136,8 @@ public class WorkflowControllerImpl {
 	/************************/
 	/**** Action methods ****/
 	/************************/
-		
+	
+	@Transactional
 	protected void actionApprove(CmsPublishList publishList, CmsProject targetProject)
 								throws WorkflowException, WorkflowPublishNotPermittedException {
 		
@@ -148,15 +151,17 @@ public class WorkflowControllerImpl {
 		}
 	}
 	
-	//transactional
+	@Transactional
 	protected void actionApprove(CmsResource resource, CmsProject targetProject) throws WorkflowException, WorkflowPublishNotPermittedException {
 				
 		String message = WorkflowConfiguration.getDefaultTaskMessage();
-		I_Task defaultTask = new Task(targetProject.getUuid(), resource.getUserLastModified(), "dummyTITLE", message);		
+		ProjectWrapper project = this.getProjectManager().getProjectById(targetProject.getUuid().toString());
+		CmsUUID actorId = _cms.getRequestContext().currentUser().getId();
+		I_Task defaultTask = new Task(targetProject.getUuid(), actorId, "Task for "+project.getName(), message);		
 		actionApproveWithTask(resource, targetProject, defaultTask);					
 	}
 	
-	//transactional
+	@Transactional
 	protected void actionApproveWithTask(CmsResource resource, CmsProject targetProject, I_Task task) throws WorkflowException, WorkflowPublishNotPermittedException {
 
 		//get workflow id
@@ -172,7 +177,7 @@ public class WorkflowControllerImpl {
 		
 	}
 	
-	//transactional
+	@Transactional
 	protected void actionPublish(CmsResource resource) throws WorkflowException, WorkflowPublishOnlineNotPermittedException {
 		
 		//get workflow id
@@ -189,7 +194,7 @@ public class WorkflowControllerImpl {
 		_relationManager.removeRelation(new ResourceIdentifier(resource));
 	}
 	
-	//transactional
+	@Transactional
 	protected void actionReject(CmsResource resource, CmsProject targetProject) throws WorkflowException, WorkflowRejectNotPermittedException {
 
 		//get workflow id

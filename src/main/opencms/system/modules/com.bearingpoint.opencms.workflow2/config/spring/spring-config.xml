@@ -3,8 +3,8 @@
 <SpringConfigFileLocation>opencms:DataSource.xml</SpringConfigFileLocation>
 <!--
   Add the WorkflowEngineBean configuration if you have your own
-          workflow engine connector: 
-	<SpringConfigFileLocation>opencms:WorkflowEngineBeans.xml</SpringConfigFileLocation>-->
+          workflow engine connector: -->
+	<SpringConfigFileLocation>opencms:WorkflowEngineBeans.xml</SpringConfigFileLocation>
 
 	<SpringConfigFileLocation>opencms:WorkflowResourceRelationBeans.xml</SpringConfigFileLocation>
 	<SpringConfigFileLocation>opencms:ProjectManagerBeans.xml</SpringConfigFileLocation>
