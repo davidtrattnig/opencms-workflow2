@@ -1,20 +1,30 @@
 /* ***************************************************************************
-* $RCSfile$ $Revision$ $Date$
-* 
-* Copyright (c) 2005 BearingPoint INFONOVA GmbH, Austria.
-*
-* This software is the confidential and proprietary information of
-* BearingPoint INFONOVA GmbH, Austria. You shall not disclose such
-* Confidential Information and shall use it only in accordance with the
-* terms of the license agreement you entered into with INFONOVA.
-*
-* BEARINGPOINT INFONOVA MAKES NO REPRESENTATIONS OR WARRANTIES ABOUT THE
-* SUITABILITY OF THE SOFTWARE, EITHER EXPRESS OR IMPLIED, INCLUDING BUT
-* NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR
-* A PARTICULAR PURPOSE, OR NON-INFRINGEMENT. BEARINGPOINT INFONOVA SHALL
-* NOT BE LIABLE FOR ANY DAMAGES SUFFERED BY LICENSEE AS A RESULT OF USING,
-* MODIFYING OR DISTRIBUTING THIS SOFTWARE OR ITS DERIVATIVES.
-*****************************************************************************/
+ * This library is part of INFONOVA OpenCms Modules.
+ * Common Modules for the Open Source Content Management System: OpenCms.
+ *
+ * Copyright (c) 2007 INFONOVA GmbH, Austria.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * For further information about INFONOVA GmbH, Austria, please
+ * see the company website: http://www.infonova.at/
+ *
+ * For further information about INFONOVA OpenCms Modules, please see the
+ * project website: http://sourceforge.net/projects/bp-cms-commons/
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *****************************************************************************/
+
 package com.bearingpoint.opencms.workflow2.cms.ui;
 
 import java.io.IOException;

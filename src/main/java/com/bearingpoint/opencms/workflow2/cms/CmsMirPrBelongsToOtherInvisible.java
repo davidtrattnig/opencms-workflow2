@@ -1,12 +1,8 @@
-/*
- * File   : $Source: /usr/local/cvs/opencms/src/org/opencms/workplace/explorer/menu/CmsMirPrOtherInvisible.java,v $
- * Date   : $Date: 2007-07-04 16:56:53 $
- * Version: $Revision: 1.2 $
+/* ***************************************************************************
+ * This library is part of INFONOVA OpenCms Modules.
+ * Common Modules for the Open Source Content Management System: OpenCms.
  *
- * This library is part of OpenCms -
- * the Open Source Content Mananagement System
- *
- * Copyright (C) 2005 Alkacon Software GmbH (http://www.alkacon.com)
+ * Copyright (c) 2007 INFONOVA GmbH, Austria.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,16 +14,16 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *
- * For further information about Alkacon Software GmbH, please see the
- * company website: http://www.alkacon.com
+ * For further information about INFONOVA GmbH, Austria, please
+ * see the company website: http://www.infonova.at/
  *
- * For further information about OpenCms, please see the
- * project website: http://www.opencms.org
- * 
+ * For further information about INFONOVA OpenCms Modules, please see the
+ * project website: http://sourceforge.net/projects/bp-cms-commons/
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
+ *****************************************************************************/
 
 package com.bearingpoint.opencms.workflow2.cms;
 
